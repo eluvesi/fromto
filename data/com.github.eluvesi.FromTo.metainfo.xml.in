@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>com.github.eluvesi.FromTo</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-3.0-or-later</project_license>
+
+  <name>From To</name>
+  <summary>Generate custom network packets</summary>
+  <description>
+    <p>
+      Simple application for low-level network packet crafting and transmission.
+      Allows users to manually configure Ethernet, IP, TCP, UDP and ICMP headers and generate custom traffic.
+    </p>
+  </description>
+
+  <developer id="com.github.eluvesi">
+    <name>eluvesi</name>
+  </developer>
+
+  <url type="homepage">https://github.com/eluvesi/fromto</url>
+  <url type="vcs-browser">https://github.com/eluvesi/fromto</url>
+  <url type="bugtracker">https://github.com/eluvesi/fromto/issues</url>
+  <url type="contact">https://github.com/eluvesi</url>
+
+  <translation type="gettext">fromto</translation>
+  <launchable type="desktop-id">com.github.eluvesi.FromTo.desktop</launchable>
+
+  <content_rating type="oars-1.1" />
+
+  <branding>
+    <color type="primary" scheme_preference="light">#99c1f1</color>
+    <color type="primary" scheme_preference="dark">#3584e4</color>
+  </branding>
+
+  <screenshots>
+    <screenshot type="default">
+      <image>https://raw.githubusercontent.com/eluvesi/fromto/refs/heads/main/data/screenshots/main.png</image>
+      <caption>Main window</caption>
+    </screenshot>
+  </screenshots>
+
+  <releases>
+    <release version="0.1.0" date="2026-10-19">
+      <description translate="no">
+        <p>Initial release</p>
+      </description>
+    </release>
+  </releases>
+
+</component>

@@ -1,0 +1,471 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   height="16px"
+   viewBox="0 0 16 16"
+   width="16px"
+   version="1.1"
+   id="svg37"
+   sodipodi:docname="com.github.eluvesi.FromTo-symbolic.svg"
+   inkscape:version="1.4.4 (dcaf3e7d9e, 2026-05-05)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview37"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="49.875"
+     inkscape:cx="8"
+     inkscape:cy="8"
+     inkscape:window-width="1920"
+     inkscape:window-height="1011"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg37" />
+  <defs
+     id="defs33">
+    <filter
+       id="a"
+       height="1"
+       width="1"
+       x="0"
+       y="0">
+      <feColorMatrix
+         color-interpolation-filters="sRGB"
+         values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1 0"
+         id="feColorMatrix1" />
+    </filter>
+    <filter
+       id="b"
+       height="1"
+       width="1"
+       x="0"
+       y="0">
+      <feColorMatrix
+         color-interpolation-filters="sRGB"
+         values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 -1 1"
+         id="feColorMatrix2" />
+    </filter>
+    <filter
+       id="c"
+       height="1"
+       width="1"
+       x="0"
+       y="0">
+      <feImage
+         height="19.2"
+         result="source"
+         width="19.2"
+         xlink:href="#l"
+         id="feImage2" />
+      <feImage
+         height="19.2"
+         result="destination"
+         width="19.2"
+         id="feImage3" />
+      <feBlend
+         color-interpolation-filters="sRGB"
+         in="source"
+         in2="destination"
+         mode="screen"
+         id="feBlend3" />
+    </filter>
+    <filter
+       id="d"
+       height="1"
+       width="1"
+       x="0"
+       y="0">
+      <feImage
+         height="19.2"
+         result="source"
+         width="19.2"
+         xlink:href="#m"
+         id="feImage4" />
+      <feImage
+         height="19.2"
+         result="destination"
+         width="19.2"
+         id="feImage5" />
+      <feComposite
+         color-interpolation-filters="sRGB"
+         in="source"
+         in2="destination"
+         k1="0"
+         k2="1"
+         k3="1"
+         k4="0"
+         operator="arithmetic"
+         id="feComposite5" />
+    </filter>
+    <filter
+       id="e"
+       height="1"
+       width="1"
+       x="0"
+       y="0">
+      <feImage
+         height="19.2"
+         result="source"
+         width="19.2"
+         xlink:href="#z"
+         id="feImage6" />
+      <feImage
+         height="19.2"
+         result="destination"
+         width="19.2"
+         xlink:href="#A"
+         id="feImage7" />
+      <feBlend
+         color-interpolation-filters="sRGB"
+         in="source"
+         in2="destination"
+         mode="screen"
+         id="feBlend7" />
+    </filter>
+    <filter
+       id="f"
+       height="1"
+       width="1"
+       x="0"
+       y="0">
+      <feImage
+         height="19.2"
+         result="source"
+         width="19.2"
+         xlink:href="#B"
+         id="feImage8" />
+      <feImage
+         height="19.2"
+         result="destination"
+         width="19.2"
+         xlink:href="#C"
+         id="feImage9" />
+      <feComposite
+         color-interpolation-filters="sRGB"
+         in="source"
+         in2="destination"
+         k1="0"
+         k2="1"
+         k3="1"
+         k4="0"
+         operator="arithmetic"
+         id="feComposite9" />
+    </filter>
+    <mask
+       id="g">
+      <g
+         filter="url(#a)"
+         id="g9">
+        <rect
+           fill-opacity="0.333"
+           height="19.2"
+           width="19.2"
+           x="-1.6"
+           y="-1.6"
+           id="rect9" />
+      </g>
+    </mask>
+    <clipPath
+       id="h">
+      <rect
+         height="152"
+         width="192"
+         id="rect10" />
+    </clipPath>
+    <g
+       id="i">
+      <rect
+         fill="none"
+         height="19.2"
+         width="19.2"
+         id="rect11" />
+      <rect
+         fill="#ffffff"
+         height="19.2"
+         width="19.2"
+         id="rect12" />
+    </g>
+    <mask
+       id="j">
+      <use
+         xlink:href="#i"
+         id="use12" />
+    </mask>
+    <mask
+       id="mask13">
+      <use
+         filter="url(#b)"
+         xlink:href="#i"
+         id="use13" />
+    </mask>
+    <mask
+       id="k">
+      <g
+         mask="url(#g)"
+         transform="matrix(1 0 0 1 1.6 1.6)"
+         id="g13">
+        <rect
+           fill="#ffffff"
+           height="19.2"
+           width="19.2"
+           x="-1.6"
+           y="-1.6"
+           id="rect13" />
+      </g>
+    </mask>
+    <g
+       id="l"
+       mask="url(#k)">
+      <g
+         clip-path="url(#h)"
+         transform="matrix(1 0 0 1 -166.4 -14.4)"
+         id="g14">
+        <path
+           d="m 64 96 v 24 l 2 -2 l 2 2 l 2 -2 l 2 2 l 2 -2 l 2 2 l 2 -2 l 2 2 v -24 z m 0 0"
+           fill="#deddda"
+           id="path13" />
+      </g>
+    </g>
+    <g
+       id="m"
+       filter="url(#c)"
+       mask="url(#j)">
+      <rect
+         height="19.2"
+         width="19.2"
+         id="rect14" />
+    </g>
+    <mask
+       id="n">
+      <g
+         filter="url(#a)"
+         id="g15">
+        <rect
+           fill-opacity="0.1"
+           height="19.2"
+           width="19.2"
+           x="-1.6"
+           y="-1.6"
+           id="rect15" />
+      </g>
+    </mask>
+    <clipPath
+       id="o">
+      <rect
+         height="152"
+         width="192"
+         id="rect16" />
+    </clipPath>
+    <mask
+       id="p">
+      <g
+         filter="url(#a)"
+         id="g17">
+        <rect
+           fill-opacity="0.1"
+           height="19.2"
+           width="19.2"
+           x="-1.6"
+           y="-1.6"
+           id="rect17" />
+      </g>
+    </mask>
+    <clipPath
+       id="q">
+      <rect
+         height="152"
+         width="192"
+         id="rect18" />
+    </clipPath>
+    <mask
+       id="r">
+      <g
+         filter="url(#a)"
+         id="g19">
+        <rect
+           fill-opacity="0.1"
+           height="19.2"
+           width="19.2"
+           x="-1.6"
+           y="-1.6"
+           id="rect19" />
+      </g>
+    </mask>
+    <clipPath
+       id="s">
+      <rect
+         height="152"
+         width="192"
+         id="rect20" />
+    </clipPath>
+    <mask
+       id="t">
+      <g
+         filter="url(#a)"
+         id="g21">
+        <rect
+           fill-opacity="0.333"
+           height="19.2"
+           width="19.2"
+           x="-1.6"
+           y="-1.6"
+           id="rect21" />
+      </g>
+    </mask>
+    <clipPath
+       id="u">
+      <rect
+         height="152"
+         width="192"
+         id="rect22" />
+    </clipPath>
+    <g
+       id="v">
+      <rect
+         fill="none"
+         height="19.2"
+         width="19.2"
+         id="rect23" />
+      <rect
+         fill="#ffffff"
+         height="19.2"
+         width="19.2"
+         id="rect24" />
+    </g>
+    <mask
+       id="w">
+      <use
+         xlink:href="#v"
+         id="use24" />
+    </mask>
+    <mask
+       id="x">
+      <use
+         filter="url(#b)"
+         xlink:href="#v"
+         id="use25" />
+    </mask>
+    <mask
+       id="y">
+      <g
+         mask="url(#t)"
+         transform="matrix(1 0 0 1 1.6 1.6)"
+         id="g25">
+        <rect
+           fill="#ffffff"
+           height="19.2"
+           width="19.2"
+           x="-1.6"
+           y="-1.6"
+           id="rect25" />
+      </g>
+    </mask>
+    <g
+       id="z"
+       mask="url(#y)">
+      <g
+         clip-path="url(#u)"
+         transform="matrix(1 0 0 1 -166.4 -14.4)"
+         id="g26">
+        <path
+           d="m 64 28 v 68 h 16 v -68 z m 0 0"
+           fill="#f6f5f4"
+           id="path25" />
+      </g>
+    </g>
+    <g
+       id="A"
+       transform="matrix(1 0 0 1 1.6 1.6)">
+      <g
+         filter="url(#d)"
+         transform="matrix(1 0 0 1 -1.6 -1.6)"
+         id="g27">
+        <rect
+           height="19.2"
+           width="19.2"
+           id="rect26" />
+      </g>
+      <g
+         mask="url(#n)"
+         id="g29">
+        <g
+           clip-path="url(#o)"
+           transform="matrix(1 0 0 1 -168 -16)"
+           id="g28">
+          <path
+             d="m 28 30 h 88 c 4.417969 0 8 3.582031 8 8 v 52 c 0 4.417969 -3.582031 8 -8 8 h -88 c -4.417969 0 -8 -3.582031 -8 -8 v -52 c 0 -4.417969 3.582031 -8 8 -8 z m 0 0"
+             id="path27" />
+        </g>
+      </g>
+      <g
+         mask="url(#p)"
+         id="g31">
+        <g
+           clip-path="url(#q)"
+           transform="matrix(1 0 0 1 -168 -16)"
+           id="g30">
+          <path
+             d="m 24 29.074219 c -0.753906 0.433593 -1.425781 0.988281 -2 1.636719 v 62.578124 c 0.574219 0.648438 1.246094 1.203126 2 1.636719 z m 0 0"
+             fill="#ffffff"
+             id="path29" />
+        </g>
+      </g>
+      <g
+         mask="url(#r)"
+         id="g33">
+        <g
+           clip-path="url(#s)"
+           transform="matrix(1 0 0 1 -168 -16)"
+           id="g32">
+          <path
+             d="m 120 29.074219 v 65.851562 c 0.757812 -0.433593 1.429688 -0.988281 2 -1.640625 v -62.570312 c -0.570312 -0.652344 -1.242188 -1.207032 -2 -1.640625 z m 0 0"
+             fill="#ffffff"
+             id="path31" />
+        </g>
+      </g>
+    </g>
+    <g
+       id="B"
+       filter="url(#e)"
+       mask="url(#w)">
+      <rect
+         height="19.2"
+         width="19.2"
+         id="rect33" />
+    </g>
+    <g
+       id="C"
+       mask="url(#x)">
+      <use
+         xlink:href="#A"
+         id="use33" />
+    </g>
+  </defs>
+  <path
+     id="path1"
+     style="display:inline;fill:#000000;stroke-width:1.14414;enable-background:new"
+     d="M 3.4589844,0 C 1.5621913,0 0,1.5666514 0,3.46875 v 9.0625 c 0,1.902098 1.5621913,3.468749 3.4589844,3.468749 H 9.5410156 C 11.437807,15.999999 13,14.433348 13,12.53125 V 6.4550782 L 10.714844,8.7402344 V 12.53125 c 0,0.671328 -0.504372,1.177735 -1.1738284,1.177735 H 3.4589844 c -0.6694567,0 -1.1738282,-0.506407 -1.1738282,-1.177735 v -9.0625 c 0,-0.6713292 0.5043715,-1.1777344 1.1738282,-1.1777344 h 6.0820312 c 0.210776,0 0.4048146,0.050976 0.5722654,0.140625 L 11.742187,0.80273437 C 11.142395,0.3032386 10.373573,0 9.5410156,0 Z" />
+  <path
+     id="path2"
+     style="display:inline;fill:#000000;stroke-width:1.14414;enable-background:new"
+     d="M 3.4589844,0 C 1.5621913,0 0,1.5666525 0,3.46875 v 1.0820313 c 0,0 1.5889701,2.3281249 3.4589844,2.3281249 H 5.6660156 L 6.8164062,5.7285156 H 3.4589844 c -0.6694567,0 -1.1738282,-0.5064051 -1.1738282,-1.1777343 V 3.46875 c 0,-0.6713292 0.5043715,-1.1777344 1.1738282,-1.1777344 h 6.0820312 c 0.2107761,0 0.4048145,0.050976 0.5722654,0.140625 L 11.742187,0.80273437 C 11.142395,0.3032386 10.373573,0 9.5410156,0 Z" />
+  <path
+     id="rect9-0"
+     style="display:inline;fill:#000000;stroke-width:0.947812;enable-background:new"
+     d="M 5.9999999,0 V 6.5449218 L 8,4.5449219 V 0 Z"
+     inkscape:label="path3" />
+  <path
+     d="M 5,10.999999 H 6.9999998 L 15.999999,1.9999993 14,0 5,8.9999999 Z m 0,0"
+     id="path3-5"
+     style="display:inline;fill:#000000;stroke-width:1;enable-background:new"
+     inkscape:label="path4" />
+</svg>

@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=From To
+Exec=fromto
+Icon=com.github.eluvesi.FromTo
+Terminal=false
+Type=Application
+Categories=Utility;
+Keywords=GTK;
+StartupNotify=true
+DBusActivatable=true

@@ -1,0 +1,3 @@
+[D-BUS Service]
+Name=com.github.eluvesi.FromTo
+Exec=@bindir@/fromto --gapplication-service
