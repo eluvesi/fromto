@@ -4,6 +4,7 @@
     <file preprocess="xml-stripblanks">window.ui</file>
     <file preprocess="xml-stripblanks">shortcuts-dialog.ui</file>
     <file preprocess="xml-stripblanks">packet_list.ui</file>
+    <file preprocess="xml-stripblanks">packet_row.ui</file>
   </gresource>
   <gresource prefix="/com/github/eluvesi/FromTo/icons/scalable/actions">
     <file alias="play-symbolic.svg">assets/icons/play-symbolic.svg</file>

@@ -28,12 +28,14 @@
                     <property name="menu-model">primary_menu</property>
                   </object>
                 </child>
+
                 <child type="start">
                   <object class="GtkButton" id="open_pcap_button">
                     <property name="icon-name">document-open-symbolic</property>
                     <property name="tooltip-text" translatable="yes">Open PCAP file</property>
                   </object>
                 </child>
+
                 <child type="start">
                   <object class="GtkButton" id="save_pcap_button">
                     <property name="icon-name">document-save-symbolic</property>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk" version="4.0"/>
+  <requires lib="Adw" version="1.0"/>
+
+  <template class="PacketRow" parent="AdwActionRow">
+    <child type="prefix">
+      <object class="GtkButton" id="send_button">
+        <property name="icon-name">send-symbolic</property>
+        <property name="tooltip-text" translatable="yes">Send packet</property>
+        <property name="valign">center</property>
+        <property name="sensitive">false</property>
+      </object>
+    </child>
+
+    <child type="suffix">
+      <object class="GtkBox">
+        <property name="orientation">horizontal</property>
+        <style>
+          <class name="linked"/>
+        </style>
+
+        <child>
+          <object class="GtkButton" id="up_button">
+            <property name="icon-name">go-up-symbolic</property>
+            <property name="tooltip-text" translatable="yes">Move up</property>
+            <property name="valign">center</property>
+          </object>
+        </child>
+
+        <child>
+          <object class="GtkButton" id="down_button">
+            <property name="icon-name">go-down-symbolic</property>
+            <property name="tooltip-text" translatable="yes">Move down</property>
+            <property name="valign">center</property>
+          </object>
+        </child>
+
+        <child>
+          <object class="GtkButton" id="remove_button">
+            <property name="icon-name">user-trash-symbolic</property>
+            <property name="tooltip-text" translatable="yes">Remove packet</property>
+            <property name="valign">center</property>
+            <style>
+              <class name="destructive-action"/>
+            </style>
+          </object>
+        </child>
+      </object>
+    </child>
+
+  </template>
+</interface>

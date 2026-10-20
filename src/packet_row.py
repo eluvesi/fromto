@@ -21,6 +21,7 @@ from gi.repository import Adw, GObject, Gtk
 from scapy.all import Ether, ICMP, IP, TCP, UDP
 
 
+@Gtk.Template(resource_path='/com/github/eluvesi/FromTo/packet_row.ui')
 class PacketRow(Adw.ActionRow):
     __gtype_name__ = 'PacketRow'
 
@@ -29,67 +30,35 @@ class PacketRow(Adw.ActionRow):
         'remove-packet': (GObject.SignalFlags.RUN_LAST, None, ()),
     }
 
+    up_button = Gtk.Template.Child()
+    down_button = Gtk.Template.Child()
+    remove_button = Gtk.Template.Child()
+
     def __init__(self, packet, position, total):
         super().__init__()
+
         self.packet = packet
         self.position = position
         self.total = total
-        self.__build_ui()
 
-    def __build_ui(self):
-        title, subtitle = self._describe_packet(self.packet)
+        title, subtitle = self._describe_packet(packet)
         self.set_title(title)
         self.set_subtitle(subtitle)
 
-        send_button = Gtk.Button(
-            icon_name='send-symbolic',
-            tooltip_text=_('Send packet'),
-            valign=Gtk.Align.CENTER,
-            sensitive=False,  # Button disabled until sending is implemented.
-        )
-        self.add_prefix(send_button)
-
-        actions_box = Gtk.Box(
-            orientation=Gtk.Orientation.HORIZONTAL,
-            css_classes=['linked'],
-        )
-
-        self.up_button = Gtk.Button(
-            icon_name='go-up-symbolic',
-            tooltip_text=_('Move up'),
-            valign=Gtk.Align.CENTER,
-        )
         self.up_button.connect(
             'clicked',
             lambda *_: self.emit('move-packet', -1),
-        )
-        actions_box.append(self.up_button)
-
-        self.down_button = Gtk.Button(
-            icon_name='go-down-symbolic',
-            tooltip_text=_('Move down'),
-            valign=Gtk.Align.CENTER,
         )
         self.down_button.connect(
             'clicked',
             lambda *_: self.emit('move-packet', 1),
         )
-        actions_box.append(self.down_button)
-
-        remove_button = Gtk.Button(
-            icon_name='user-trash-symbolic',
-            tooltip_text=_('Remove packet'),
-            valign=Gtk.Align.CENTER,
-            css_classes=['destructive-action'],
-        )
-        remove_button.connect(
+        self.remove_button.connect(
             'clicked',
             lambda *_: self.emit('remove-packet'),
         )
-        actions_box.append(remove_button)
 
-        self.add_suffix(actions_box)
-        self.update_position(self.position, self.total)
+        self.update_position(position, total)
 
     def update_position(self, position, total):
         """Update packet reordering controls."""
