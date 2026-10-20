@@ -16,19 +16,10 @@
         <!-- Split view sidebar: packet list and controls -->
         <property name="sidebar">
           <object class="AdwToolbarView">
+
+            <!-- Sidebar header -->
             <child type="top">
-
-              <!-- Sidebar header -->
               <object class="AdwHeaderBar">
-                <child type="end">
-                  <object class="GtkMenuButton">
-                    <property name="primary">True</property>
-                    <property name="icon-name">open-menu-symbolic</property>
-                    <property name="tooltip-text" translatable="yes">Main Menu</property>
-                    <property name="menu-model">primary_menu</property>
-                  </object>
-                </child>
-
                 <child type="start">
                   <object class="GtkButton" id="open_pcap_button">
                     <property name="icon-name">document-open-symbolic</property>
@@ -42,10 +33,20 @@
                     <property name="tooltip-text" translatable="yes">Save to PCAP file</property>
                   </object>
                 </child>
+
+                <child type="end">
+                  <object class="GtkMenuButton">
+                    <property name="primary">True</property>
+                    <property name="icon-name">open-menu-symbolic</property>
+                    <property name="tooltip-text" translatable="yes">Main Menu</property>
+                    <property name="menu-model">primary_menu</property>
+                  </object>
+                </child>
+
               </object>
             </child>
 
-            <!-- Sidebar main content: packet queue -->
+            <!-- Sidebar main content: packet list -->
             <property name="content">
               <object class="GtkScrolledWindow">
                 <child>
@@ -93,6 +94,7 @@
                     <property name="icon-name">play-symbolic</property>
                   </object>
                 </child>
+
               </object>
             </child>
 
@@ -101,66 +103,7 @@
 
         <!-- Split view content: packet fields editor -->
         <property name="content">
-          <object class="AdwToolbarView">
-            <child type="top">
-              <object class="AdwHeaderBar">
-                <property name="title-widget">
-                  <object class="AdwViewSwitcher">
-                    <property name="stack">editor_viewstack</property>
-                    <property name="policy">wide</property>
-                  </object>
-                </property>
-              </object>
-            </child>
-
-            <property name="content">
-              <object class="AdwViewStack" id="editor_viewstack">
-
-                <!-- L2: Data Link layer -->
-                <child>
-                  <object class="AdwViewStackPage">
-                    <property name="name">data_link</property>
-                    <property name="title" translatable="yes">Data Link</property>
-                    <property name="icon-name">data-link-layer-symbolic</property>
-                    <property name="child">
-                      <object class="GtkLabel">
-                        <property name="label" translatable="yes">Data link layer fields</property>
-                      </object>
-                    </property>
-                  </object>
-                </child>
-
-                <!-- L3: Network layer -->
-                <child>
-                  <object class="AdwViewStackPage">
-                    <property name="name">network</property>
-                    <property name="title" translatable="yes">Network</property>
-                    <property name="icon-name">network-layer-symbolic</property>
-                    <property name="child">
-                      <object class="GtkLabel">
-                        <property name="label" translatable="yes">Network layer fields</property>
-                      </object>
-                    </property>
-                  </object>
-                </child>
-
-                <!-- L4: Transport layer -->
-                <child>
-                  <object class="AdwViewStackPage">
-                    <property name="name">transport</property>
-                    <property name="title" translatable="yes">Transport</property>
-                    <property name="icon-name">transport-layer-symbolic</property>
-                    <property name="child">
-                      <object class="GtkLabel">
-                        <property name="label" translatable="yes">Transport layer fields</property>
-                      </object>
-                    </property>
-                  </object>
-                </child>
-
-              </object>
-            </property>
-          </object>
+          <object class="PacketEditor" id="packet_editor"/>
         </property>
 
       </object>

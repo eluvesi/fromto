@@ -20,6 +20,7 @@
 from gi.repository import Adw, Gtk
 from scapy.all import get_if_list
 
+from .packet_editor import PacketEditor
 from .packet_list import PacketList
 from .packet_row import PacketRow
 
@@ -29,6 +30,7 @@ class FromtoWindow(Adw.ApplicationWindow):
     __gtype_name__ = 'FromtoWindow'
 
     packet_list = Gtk.Template.Child()
+    packet_editor = Gtk.Template.Child()
     interface_dropdown = Gtk.Template.Child()
     delay_spinbutton = Gtk.Template.Child()
     send_button = Gtk.Template.Child()
