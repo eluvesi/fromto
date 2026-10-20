@@ -61,38 +61,7 @@
                 <property name="icon-name">data-symbolic</property>
 
                 <property name="child">
-                  <object class="GtkScrolledWindow">
-                    <property name="vexpand">True</property>
-
-                    <child>
-                      <object class="GtkTextView" id="preview_textview">
-                        <!-- Style with rounded corners -->
-                        <style>
-                          <class name="card"/>
-                        </style>
-                        <!-- Margin for text view -->
-                        <property name="margin-start">12</property>
-                        <property name="margin-end">12</property>
-                        <property name="margin-bottom">6</property>
-                        <!-- Margin for text in the text view -->
-                        <property name="left-margin">12</property>
-                        <property name="right-margin">12</property>
-                        <property name="top-margin">12</property>
-                        <property name="bottom-margin">12</property>
-                        <!-- Text properties -->
-                        <property name="editable">False</property>
-                        <property name="cursor-visible">False</property>
-                        <property name="monospace">True</property>
-                        <!-- Text buffer -->
-                        <property name="buffer">
-                          <object class="GtkTextBuffer">
-                            <property name="text" translatable="yes">Packet preview will appear here.</property>
-                          </object>
-                        </property>
-                      </object>
-                    </child>
-
-                  </object>
+                  <object class="PreviewPage" id="preview_page"/>
                 </property>
 
               </object>

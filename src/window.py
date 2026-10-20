@@ -42,9 +42,15 @@ class FromtoWindow(Adw.ApplicationWindow):
         # Sending remains disabled until it is implemented.
         self.send_button.set_sensitive(False)
 
+        self.packet_list.connect('packet-selected', self._on_packet_selected)
+
     def _populate_interfaces(self):
         """Populate the interface dropdown using Scapy."""
         interfaces = get_if_list()
         self.interface_dropdown.set_model(Gtk.StringList.new(interfaces))
         self.interface_dropdown.set_sensitive(bool(interfaces))
+
+    def _on_packet_selected(self, _packet_list, packet):
+        """Display the selected packet in the packet editor."""
+        self.packet_editor.set_packet(packet)
 

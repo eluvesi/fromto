@@ -17,7 +17,7 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-from gi.repository import Adw, Gtk
+from gi.repository import Adw, GObject, Gtk
 from scapy.all import Ether, ICMP, IP, TCP, UDP
 from itertools import count
 
@@ -28,13 +28,24 @@ from .packet_row import PacketRow
 class PacketList(Gtk.Box):
     __gtype_name__ = 'PacketList'
 
+    __gsignals__ = {
+        'packet-selected': (
+            GObject.SignalFlags.RUN_LAST,
+            None,
+            (GObject.TYPE_PYOBJECT,),
+        ),
+    }
+
     packet_listbox = Gtk.Template.Child()
     add_packet_buttonrow = Gtk.Template.Child()
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+
         self._rows = []
+
         self.add_packet_buttonrow.connect('activated', self._on_add_packet)
+        self.packet_listbox.connect('row-selected', self._on_row_selected)
 
         # Temporary solution for creating different packets.
         self._packet_counter = count(0)
@@ -97,6 +108,11 @@ class PacketList(Gtk.Box):
         self.packet_listbox.select_row(row)
 
         self._update_rows()
+
+    def _on_row_selected(self, _listbox, row):
+        """Emit a signal when the selected packet changes."""
+        packet = row.packet if row is not None else None
+        self.emit('packet-selected', packet)
 
     def _update_rows(self):
         """Refresh move-button sensitivity for every row."""

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk" version="4.0"/>
+  <requires lib="Adw" version="1.0"/>
+
+  <template class="PreviewPage" parent="GtkBox">
+    <property name="orientation">vertical</property>
+
+    <child>
+      <object class="AdwClamp">
+        <property name="maximum-size">650</property>
+        <property name="tightening-threshold">650</property>
+        <property name="margin-start">12</property>
+        <property name="margin-end">12</property>
+        <property name="margin-bottom">6</property>
+
+        <property name="child">
+          <object class="GtkScrolledWindow">
+            <property name="vexpand">true</property>
+
+            <child>
+              <object class="GtkTextView" id="hexdump_textview">
+                <property name="editable">false</property>
+                <property name="cursor-visible">false</property>
+                <property name="monospace">true</property>
+                <property name="wrap-mode">none</property>
+                <property name="left-margin">12</property>
+                <property name="right-margin">12</property>
+                <property name="top-margin">12</property>
+                <property name="bottom-margin">12</property>
+                <style>
+                  <class name="card"/>
+                </style>
+              </object>
+            </child>
+
+          </object>
+        </property>
+
+      </object>
+    </child>
+
+  </template>
+</interface>
+

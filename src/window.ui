@@ -5,13 +5,13 @@
 
   <template class="FromtoWindow" parent="AdwApplicationWindow">
     <property name="title" translatable="yes">From To</property>
-    <property name="default-width">1024</property>
-    <property name="default-height">768</property>
+    <property name="default-width">1200</property>
+    <property name="default-height">800</property>
 
     <property name="content">
       <object class="AdwOverlaySplitView" id="split_view">
         <property name="sidebar-width-fraction">0.375</property>
-        <property name="min-sidebar-width">512</property>
+        <property name="min-sidebar-width">480</property>
 
         <!-- Split view sidebar: packet list and controls -->
         <property name="sidebar">

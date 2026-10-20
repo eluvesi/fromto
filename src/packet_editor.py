@@ -20,14 +20,15 @@
 
 from gi.repository import Adw, Gtk
 
+from .preview_page import PreviewPage
+
 
 @Gtk.Template(resource_path='/com/github/eluvesi/FromTo/packet_editor.ui')
 class PacketEditor(Gtk.Box):
     __gtype_name__ = 'PacketEditor'
 
-    editor_viewstack = Gtk.Template.Child()
     edit_page = Gtk.Template.Child()
-    preview_textview = Gtk.Template.Child()
+    preview_page = Gtk.Template.Child()
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -41,18 +42,11 @@ class PacketEditor(Gtk.Box):
     def set_packet(self, packet):
         """Set the packet displayed by the editor."""
         self._packet = packet
+        # EditPage will be added here when its widget is implemented.
+        self.preview_page.set_packet(packet)
 
-        # Page-specific updates will be implemented separately.
-        self._update_edit_page()
-        self._update_preview_page()
-
-    def _update_edit_page(self):
-        """Update the Edit page from the current packet."""
-        # TODO: Populate the protocol editors.
-        pass
-
-    def _update_preview_page(self):
-        """Update the Preview page from the current packet."""
-        # TODO: Generate a hexadecimal dump of the packet.
-        pass
+    def refresh(self):
+        """Refresh page representations after the packet has changed."""
+        # EditPage will be added here when its widget is implemented.
+        self.preview_page.refresh()
 

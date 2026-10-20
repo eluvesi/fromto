@@ -16,7 +16,7 @@
           <class name="boxed-list"/>
         </style>
 
-        <!-- Add packet button row -->
+        <!-- "Add Packet" button row -->
         <child type="end">
           <object class="AdwButtonRow" id="add_packet_buttonrow">
             <property name="title" translatable="yes">Add Packet</property>

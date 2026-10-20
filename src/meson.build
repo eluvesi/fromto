@@ -33,6 +33,7 @@ fromto_sources = [
   'packet_editor.py',
   'packet_list.py',
   'packet_row.py',
+  'preview_page.py',
 ]
 
 install_data(fromto_sources, install_dir: moduledir)

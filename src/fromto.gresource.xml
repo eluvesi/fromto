@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
   <gresource prefix="/com/github/eluvesi/FromTo">
-    <file preprocess="xml-stripblanks">window.ui</file>
-    <file preprocess="xml-stripblanks">shortcuts-dialog.ui</file>
     <file preprocess="xml-stripblanks">packet_editor.ui</file>
     <file preprocess="xml-stripblanks">packet_list.ui</file>
     <file preprocess="xml-stripblanks">packet_row.ui</file>
+    <file preprocess="xml-stripblanks">preview_page.ui</file>
+    <file preprocess="xml-stripblanks">shortcuts-dialog.ui</file>
+    <file preprocess="xml-stripblanks">window.ui</file>
   </gresource>
   <gresource prefix="/com/github/eluvesi/FromTo/icons/scalable/actions">
     <file alias="data-symbolic.svg">assets/icons/data-symbolic.svg</file>
     <file alias="edit-symbolic.svg">assets/icons/edit-symbolic.svg</file>
     <file alias="play-symbolic.svg">assets/icons/play-symbolic.svg</file>
     <file alias="send-symbolic.svg">assets/icons/send-symbolic.svg</file>
-    <file alias="data-link-layer-symbolic.svg">assets/icons/data-link-layer-symbolic.svg</file>
-    <file alias="network-layer-symbolic.svg">assets/icons/network-layer-symbolic.svg</file>
-    <file alias="transport-layer-symbolic.svg">assets/icons/transport-layer-symbolic.svg</file>
   </gresource>
 </gresources>
+
