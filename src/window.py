@@ -17,13 +17,32 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-from gi.repository import Adw
-from gi.repository import Gtk
+from gi.repository import Adw, Gtk
+from scapy.all import get_if_list
+
+from .packet_list import PacketList
+from .packet_row import PacketRow
+
 
 @Gtk.Template(resource_path='/com/github/eluvesi/FromTo/window.ui')
 class FromtoWindow(Adw.ApplicationWindow):
     __gtype_name__ = 'FromtoWindow'
 
+    packet_list = Gtk.Template.Child()
+    interface_dropdown = Gtk.Template.Child()
+    delay_spinbutton = Gtk.Template.Child()
+    send_button = Gtk.Template.Child()
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+        self._populate_interfaces()
+
+        # Sending remains disabled until it is implemented.
+        self.send_button.set_sensitive(False)
+
+    def _populate_interfaces(self):
+        """Populate the interface dropdown using Scapy."""
+        interfaces = get_if_list()
+        self.interface_dropdown.set_model(Gtk.StringList.new(interfaces))
+        self.interface_dropdown.set_sensitive(bool(interfaces))
 

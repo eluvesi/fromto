@@ -35,6 +35,7 @@ locale.bindtextdomain('fromto', localedir)
 locale.textdomain('fromto')
 gettext.bindtextdomain('fromto', localedir)
 gettext.textdomain('fromto')
+gettext.install('fromto', localedir)
 
 if __name__ == '__main__':
     import gi

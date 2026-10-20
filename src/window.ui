@@ -13,7 +13,7 @@
         <property name="sidebar-width-fraction">0.375</property>
         <property name="min-sidebar-width">512</property>
 
-        <!-- Split view sidebar: packet queue -->
+        <!-- Split view sidebar: packet list and controls -->
         <property name="sidebar">
           <object class="AdwToolbarView">
             <child type="top">
@@ -24,7 +24,7 @@
                   <object class="GtkMenuButton">
                     <property name="primary">True</property>
                     <property name="icon-name">open-menu-symbolic</property>
-                    <property name="tooltip-text" translatable="yes">Main menu</property>
+                    <property name="tooltip-text" translatable="yes">Main Menu</property>
                     <property name="menu-model">primary_menu</property>
                   </object>
                 </child>
@@ -43,6 +43,15 @@
               </object>
             </child>
 
+            <!-- Sidebar main content: packet queue -->
+            <property name="content">
+              <object class="GtkScrolledWindow">
+                <child>
+                  <object class="PacketList" id="packet_list"/>
+                </child>
+              </object>
+            </property>
+
             <!-- Sidebar bottom panel -->
             <child type="bottom">
               <object class="GtkActionBar">
@@ -58,7 +67,7 @@
 
                 <!-- Delay spin button -->
                 <child>
-                  <object class="GtkSpinButton" id="delay_spin">
+                  <object class="GtkSpinButton" id="delay_spinbutton">
                     <property name="tooltip-text" translatable="yes">Delay (ms)</property>
                     <property name="adjustment">
                       <object class="GtkAdjustment">
@@ -85,131 +94,6 @@
               </object>
             </child>
 
-            <!-- Sidebar main content: packet queue -->
-            <property name="content">
-              <object class="GtkScrolledWindow">
-                <child>
-                  <object class="GtkListBox" id="packet_list">
-                    <property name="margin-start">12</property>
-                    <property name="margin-end">12</property>
-                    <property name="valign">start</property>
-                    <style>
-                      <class name="boxed-list"/>
-                    </style>
-
-                    <!-- Packet 1 (example) -->
-                    <child>
-                      <object class="AdwActionRow" id="packet_row_1">
-                        <property name="title">192.168.1.117 → 1.1.1.1</property>
-                        <property name="subtitle">IPv4 · UDP</property>
-
-                        <child type="prefix">
-                          <object class="GtkButton">
-                            <property name="icon-name">send-symbolic</property>
-                            <property name="tooltip-text" translatable="yes">Send single packet</property>
-                            <property name="valign">center</property>
-                          </object>
-                        </child>
-
-                        <child type="suffix">
-                          <object class="GtkBox">
-                            <property name="orientation">horizontal</property>
-                            <style>
-                              <class name="linked"/>
-                            </style>
-                            <child>
-                              <object class="GtkButton">
-                                <property name="icon-name">go-up-symbolic</property>
-                                <property name="tooltip-text" translatable="yes">Move up</property>
-                                <property name="valign">center</property>
-                                <property name="sensitive">False</property>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkButton">
-                                <property name="icon-name">go-down-symbolic</property>
-                                <property name="tooltip-text" translatable="yes">Move down</property>
-                                <property name="valign">center</property>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkButton">
-                                <property name="icon-name">user-trash-symbolic</property>
-                                <property name="tooltip-text" translatable="yes">Remove</property>
-                                <property name="valign">center</property>
-                                <style>
-                                  <class name="destructive-action"/>
-                                </style>
-                              </object>
-                            </child>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-
-                    <!-- Packet 2 (example) -->
-                    <child>
-                      <object class="AdwActionRow" id="packet_row_2">
-                        <property name="title">192.168.1.117 → 8.8.8.8</property>
-                        <property name="subtitle">IPv4 · TCP</property>
-
-                        <child type="prefix">
-                          <object class="GtkButton">
-                            <property name="icon-name">send-symbolic</property>
-                            <property name="tooltip-text" translatable="yes">Send single packet</property>
-                            <property name="valign">center</property>
-                          </object>
-                        </child>
-
-                        <child type="suffix">
-                          <object class="GtkBox">
-                            <property name="orientation">horizontal</property>
-                            <style>
-                              <class name="linked"/>
-                            </style>
-                            <child>
-                              <object class="GtkButton">
-                                <property name="icon-name">go-up-symbolic</property>
-                                <property name="tooltip-text" translatable="yes">Move up</property>
-                                <property name="valign">center</property>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkButton">
-                                <property name="icon-name">go-down-symbolic</property>
-                                <property name="tooltip-text" translatable="yes">Move down</property>
-                                <property name="valign">center</property>
-                                <property name="sensitive">False</property>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkButton">
-                                <property name="icon-name">user-trash-symbolic</property>
-                                <property name="tooltip-text" translatable="yes">Remove</property>
-                                <property name="valign">center</property>
-                                <style>
-                                  <class name="destructive-action"/>
-                                </style>
-                              </object>
-                            </child>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-
-                    <!-- Add packet button row -->
-                    <child type="end">
-                      <object class="AdwButtonRow" id="add_packet_row">
-                        <property name="title" translatable="yes">Add packet</property>
-                        <property name="start-icon-name">list-add-symbolic</property>
-                        <property name="selectable">False</property>
-                      </object>
-                    </child>
-
-                  </object>
-                </child>
-              </object>
-            </property>
           </object>
         </property>
 
@@ -220,7 +104,7 @@
               <object class="AdwHeaderBar">
                 <property name="title-widget">
                   <object class="AdwViewSwitcher">
-                    <property name="stack">editor_stack</property>
+                    <property name="stack">editor_viewstack</property>
                     <property name="policy">wide</property>
                   </object>
                 </property>
@@ -228,7 +112,7 @@
             </child>
 
             <property name="content">
-              <object class="AdwViewStack" id="editor_stack">
+              <object class="AdwViewStack" id="editor_viewstack">
 
                 <!-- L2: Data Link layer -->
                 <child>

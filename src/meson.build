@@ -30,6 +30,8 @@ fromto_sources = [
   '__init__.py',
   'main.py',
   'window.py',
+  'packet_list.py',
+  'packet_row.py',
 ]
 
 install_data(fromto_sources, install_dir: moduledir)

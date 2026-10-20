@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk" version="4.0"/>
+  <requires lib="Adw" version="1.0"/>
+
+  <template class="PacketList" parent="GtkBox">
+	  <property name="orientation">vertical</property>
+
+    <!-- List of packet rows and a button row to add another one packet -->
+    <child>
+      <object class="GtkListBox" id="packet_listbox">
+        <property name="margin-start">12</property>
+        <property name="margin-end">12</property>
+        <property name="valign">start</property>
+        <style>
+          <class name="boxed-list"/>
+        </style>
+
+        <!-- Add packet button row -->
+        <child type="end">
+          <object class="AdwButtonRow" id="add_packet_buttonrow">
+            <property name="title" translatable="yes">Add Packet</property>
+            <property name="start-icon-name">list-add-symbolic</property>
+            <property name="selectable">False</property>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>
+
