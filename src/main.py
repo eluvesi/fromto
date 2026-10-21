@@ -31,19 +31,31 @@ class FromtoApplication(Adw.Application):
     """The main application singleton class."""
 
     def __init__(self):
-        super().__init__(application_id='com.github.eluvesi.FromTo',
-                         flags=Gio.ApplicationFlags.DEFAULT_FLAGS,
-                         resource_base_path='/com/github/eluvesi/FromTo'
-                         )
-        self.create_action('quit', lambda *_: self.quit(), ['<control>q'])
-        self.create_action('preferences', self.on_preferences_action, ['<control>comma'])
-        self.create_action('about', self.on_about_action)
+        super().__init__(
+            application_id='com.github.eluvesi.FromTo',
+            flags=Gio.ApplicationFlags.DEFAULT_FLAGS,
+            resource_base_path='/com/github/eluvesi/FromTo',
+        )
+
+        self.create_action(
+            'quit',
+            lambda *_: self.quit(),
+            ['<control>q'],
+        )
+        self.create_action(
+            'preferences',
+            self.on_preferences_action,
+            ['<control>comma'],
+        )
+        self.create_action(
+            'about',
+            self.on_about_action,
+        )
 
     def do_activate(self):
         """Called when the application is activated.
 
-        We raise the application's main window, creating it if
-        necessary.
+        We raise the application's main window, creating it if necessary.
         """
         win = self.props.active_window
         if not win:
@@ -52,17 +64,18 @@ class FromtoApplication(Adw.Application):
 
     def on_about_action(self, *args):
         """Callback for the app.about action."""
-        about = Adw.AboutDialog(application_name='From To',
-                                application_icon='com.github.eluvesi.FromTo',
-                                developer_name='eluvesi',
-                                license_type=Gtk.License.GPL_3_0,
-                                website='https://github.com/eluvesi/fromto',
-                                version='0.1.0',
-                                translator_credits = _('translator-credits'),
-                                developers=['eluvesi https://github.com/eluvesi'],
-                                designers=['eluvesi https://github.com/eluvesi'],
-                                copyright='© 2026 eluvesi'
-                                )
+        about = Adw.AboutDialog(
+            application_name='From To',
+            application_icon='com.github.eluvesi.FromTo',
+            developer_name='eluvesi',
+            license_type=Gtk.License.GPL_3_0,
+            website='https://github.com/eluvesi/fromto',
+            version='0.1.0',
+            translator_credits = _('translator-credits'),
+            developers=['eluvesi https://github.com/eluvesi'],
+            designers=['eluvesi https://github.com/eluvesi'],
+            copyright='© 2026 eluvesi'
+        )
         about.present(self.props.active_window)
 
     def on_preferences_action(self, widget, _):
