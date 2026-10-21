@@ -25,8 +25,12 @@ from scapy.all import hexdump
 
 @Gtk.Template(resource_path='/com/github/eluvesi/FromTo/preview_page.ui')
 class PreviewPage(Gtk.Box):
+    """Display a packet summary, field details, and hexadecimal dump."""
+
     __gtype_name__ = 'PreviewPage'
 
+    summary_textview = Gtk.Template.Child()
+    details_textview = Gtk.Template.Child()
     hexdump_textview = Gtk.Template.Child()
 
     def __init__(self, **kwargs):
@@ -40,29 +44,42 @@ class PreviewPage(Gtk.Box):
         return self._packet
 
     def set_packet(self, packet):
-        """Set the packet to preview and update the displayed dump."""
+        """Set the packet to preview and update all views."""
         self._packet = packet
         self.refresh()
 
     def refresh(self):
-        """Refresh the dump after the packet has been modified."""
+        """Refresh all previews after the packet has been modified."""
         if self._packet is None:
             self._show_empty_state()
             return
 
         try:
-            dump = hexdump(self._packet, dump=True)
+            previews = (
+                (self.summary_textview, self._packet.summary()),
+                (self.details_textview, self._packet.show2(dump=True)),
+                (self.hexdump_textview, hexdump(self._packet, dump=True)),
+            )
         except Exception as error:
-            self._set_text(f'Unable to generate packet preview:\n{error}')
+            message = f'Unable to generate packet preview:\n{error}'
+            self._set_all_text(message)
             return
 
-        self._set_text(dump or '(Empty packet)')
+        for textview, text in previews:
+            self._set_text(textview, text or '(No data)')
 
     def _show_empty_state(self):
-        self._set_text('Select a packet to preview its bytes.')
+        """Display a placeholder when no packet is selected."""
+        self._set_all_text('Select a packet to preview its contents.')
 
-    def _set_text(self, text):
-        buffer = self.hexdump_textview.get_buffer()
-        buffer.set_text(text)
+    def _set_all_text(self, text):
+        """Set the same text in all preview fields."""
+        self._set_text(self.summary_textview, text)
+        self._set_text(self.details_textview, text)
+        self._set_text(self.hexdump_textview, text)
 
+    @staticmethod
+    def _set_text(textview, text):
+        """Replace the contents of a text view's buffer."""
+        buffer = textview.get_buffer().set_text(text)
 
