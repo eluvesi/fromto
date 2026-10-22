@@ -44,7 +44,7 @@
                     <child>
                       <object class="GtkButton" id="copy_summary_button">
                         <property name="icon-name">edit-copy-symbolic</property>
-                        <property name="tooltip-text">Copy summary</property>
+                        <property name="tooltip-text">Copy Summary</property>
                         <style>
                           <class name="flat"/>
                         </style>
@@ -102,7 +102,7 @@
                     <child type="end">
                       <object class="GtkButton" id="copy_details_button">
                         <property name="icon-name">edit-copy-symbolic</property>
-                        <property name="tooltip-text">Copy details</property>
+                        <property name="tooltip-text">Copy Details</property>
                         <style>
                           <class name="flat"/>
                         </style>
@@ -161,7 +161,7 @@
                     <child type="end">
                       <object class="GtkButton" id="copy_hexdump_button">
                         <property name="icon-name">edit-copy-symbolic</property>
-                        <property name="tooltip-text">Copy hex dump</property>
+                        <property name="tooltip-text">Copy Hex Dump</property>
                         <style>
                           <class name="flat"/>
                         </style>
