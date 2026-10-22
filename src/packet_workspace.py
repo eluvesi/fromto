@@ -1,4 +1,4 @@
-# packet_editor.py
+# packet_workspace.py
 #
 # Copyright 2026 eluvesi
 #
@@ -23,11 +23,11 @@ from gi.repository import Adw, Gtk
 from .preview_page import PreviewPage
 
 
-@Gtk.Template(resource_path='/com/github/eluvesi/FromTo/packet_editor.ui')
-class PacketEditor(Gtk.Box):
-    __gtype_name__ = 'PacketEditor'
+@Gtk.Template(resource_path='/com/github/eluvesi/FromTo/packet_workspace.ui')
+class PacketWorkspace(Gtk.Box):
+    __gtype_name__ = 'PacketWorkspace'
 
-    edit_page = Gtk.Template.Child()
+    editor_page = Gtk.Template.Child()
     preview_page = Gtk.Template.Child()
 
     def __init__(self, **kwargs):
@@ -36,11 +36,11 @@ class PacketEditor(Gtk.Box):
 
     @property
     def packet(self):
-        """The packet currently displayed by the editor."""
+        """The packet currently displayed by the workspace."""
         return self._packet
 
     def set_packet(self, packet):
-        """Set the packet displayed by the editor."""
+        """Set the packet displayed by the workspace."""
         self._packet = packet
         # EditPage will be added here when its widget is implemented.
         self.preview_page.set_packet(packet)

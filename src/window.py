@@ -20,9 +20,8 @@
 from gi.repository import Adw, Gtk
 from scapy.all import get_if_list, sendp
 
-from .packet_editor import PacketEditor
 from .packet_list import PacketList
-from .packet_row import PacketRow
+from .packet_workspace import PacketWorkspace
 
 
 @Gtk.Template(resource_path='/com/github/eluvesi/FromTo/window.ui')
@@ -30,7 +29,7 @@ class FromtoWindow(Adw.ApplicationWindow):
     __gtype_name__ = 'FromtoWindow'
 
     packet_list = Gtk.Template.Child()
-    packet_editor = Gtk.Template.Child()
+    packet_workspace = Gtk.Template.Child()
     interface_dropdown = Gtk.Template.Child()
     delay_spinbutton = Gtk.Template.Child()
     send_button = Gtk.Template.Child()
@@ -53,8 +52,8 @@ class FromtoWindow(Adw.ApplicationWindow):
         self.interface_dropdown.set_sensitive(bool(interfaces))
 
     def _on_packet_selected(self, _packet_list, packet):
-        """Display the selected packet in the packet editor."""
-        self.packet_editor.set_packet(packet)
+        """Display the selected packet in the packet workspace."""
+        self.packet_workspace.set_packet(packet)
 
     def _show_message(self, heading, body):
         """Show a message dialog."""

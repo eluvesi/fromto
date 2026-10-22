@@ -19,9 +19,9 @@
     <child type="suffix">
       <object class="GtkMenuButton">
         <property name="icon-name">view-more-horizontal-symbolic</property>
-        <property name="tooltip-text" translatable="yes">Packet Actions</property>
+        <property name="tooltip-text" translatable="yes">Packet Menu</property>
         <property name="valign">center</property>
-        <property name="menu-model">packet_actions_menu</property>
+        <property name="menu-model">packet_menu</property>
         <style>
           <class name="flat"/>
         </style>
@@ -30,26 +30,26 @@
 
   </template>
 
-  <menu id="packet_actions_menu">
+  <menu id="packet_menu">
     <section>
       <item>
-        <attribute name="label" translatable="yes">Send</attribute>
+        <attribute name="label" translatable="yes">_Send</attribute>
         <attribute name="action">packet.send</attribute>
       </item>
     </section>
     <section>
       <item>
-        <attribute name="label" translatable="yes">Move Up</attribute>
+        <attribute name="label" translatable="yes">Move _Up</attribute>
         <attribute name="action">packet.move-up</attribute>
       </item>
       <item>
-        <attribute name="label" translatable="yes">Move Down</attribute>
+        <attribute name="label" translatable="yes">Move _Down</attribute>
         <attribute name="action">packet.move-down</attribute>
       </item>
     </section>
     <section>
       <item>
-        <attribute name="label" translatable="yes">Remove</attribute>
+        <attribute name="label" translatable="yes">_Remove</attribute>
         <attribute name="action">packet.remove</attribute>
       </item>
     </section>

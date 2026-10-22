@@ -3,37 +3,37 @@
   <requires lib="gtk" version="4.0"/>
   <requires lib="Adw" version="1.0"/>
 
-  <template class="PacketEditor" parent="GtkBox">
+  <template class="PacketWorkspace" parent="GtkBox">
     <property name="orientation">vertical</property>
 
     <child>
       <object class="AdwToolbarView">
 
-        <!-- Editor header -->
+        <!-- Packet Workspace header -->
         <child type="top">
           <object class="AdwHeaderBar">
             <property name="title-widget">
               <object class="AdwViewSwitcher">
-                <property name="stack">editor_viewstack</property>
+                <property name="stack">workspace_viewstack</property>
                 <property name="policy">wide</property>
               </object>
             </property>
           </object>
         </child>
 
-        <!-- Editor pages -->
+        <!-- Packet Workspace pages: Editor and Preview -->
         <property name="content">
-          <object class="AdwViewStack" id="editor_viewstack">
+          <object class="AdwViewStack" id="workspace_viewstack">
 
-            <!-- Edit page -->
+            <!-- Editor page -->
             <child>
               <object class="AdwViewStackPage">
-                <property name="name">edit</property>
-                <property name="title" translatable="yes">Edit</property>
-                <property name="icon-name">edit-symbolic</property>
+                <property name="name">editor</property>
+                <property name="title" translatable="yes">Editor</property>
+                <property name="icon-name">document-edit-symbolic</property>
 
                 <property name="child">
-                  <object class="GtkScrolledWindow" id="edit_page">
+                  <object class="GtkScrolledWindow" id="editor_page">
                     <property name="child">
                       <object class="GtkBox">
                         <property name="orientation">vertical</property>
@@ -58,7 +58,7 @@
               <object class="AdwViewStackPage">
                 <property name="name">preview</property>
                 <property name="title" translatable="yes">Preview</property>
-                <property name="icon-name">data-symbolic</property>
+                <property name="icon-name">view-reveal-symbolic</property>
 
                 <property name="child">
                   <object class="PreviewPage" id="preview_page"/>
@@ -69,6 +69,7 @@
 
           </object>
         </property>
+
       </object>
     </child>
 

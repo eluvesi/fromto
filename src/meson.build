@@ -30,9 +30,9 @@ fromto_sources = [
   '__init__.py',
   'main.py',
   'window.py',
-  'packet_editor.py',
   'packet_list.py',
   'packet_row.py',
+  'packet_workspace.py',
   'preview_page.py',
 ]
 

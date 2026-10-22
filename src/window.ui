@@ -23,14 +23,14 @@
                 <child type="start">
                   <object class="GtkButton" id="open_pcap_button">
                     <property name="icon-name">document-open-symbolic</property>
-                    <property name="tooltip-text" translatable="yes">Open PCAP file</property>
+                    <property name="tooltip-text" translatable="yes">Open…</property>
                   </object>
                 </child>
 
                 <child type="start">
                   <object class="GtkButton" id="save_pcap_button">
                     <property name="icon-name">document-save-symbolic</property>
-                    <property name="tooltip-text" translatable="yes">Save to PCAP file</property>
+                    <property name="tooltip-text" translatable="yes">Save As…</property>
                   </object>
                 </child>
 
@@ -46,7 +46,7 @@
               </object>
             </child>
 
-            <!-- Sidebar main content: packet list -->
+            <!-- Sidebar main content: Packet List -->
             <property name="content">
               <object class="GtkScrolledWindow">
                 <child>
@@ -70,14 +70,14 @@
                     <child>
                       <object class="GtkDropDown" id="interface_dropdown">
                         <property name="hexpand">True</property>
-                        <property name="tooltip-text" translatable="yes">Network interface</property>
+                        <property name="tooltip-text" translatable="yes">Network Interface</property>
                       </object>
                     </child>
 
                     <!-- Delay spin button -->
                     <child>
                       <object class="GtkSpinButton" id="delay_spinbutton">
-                        <property name="tooltip-text" translatable="yes">Delay (ms)</property>
+                        <property name="tooltip-text" translatable="yes">Delay Between Packets (ms)</property>
                         <property name="adjustment">
                           <object class="GtkAdjustment">
                             <property name="lower">0</property>
@@ -96,8 +96,8 @@
                         <style>
                           <class name="suggested-action"/>
                         </style>
-                        <property name="tooltip-text" translatable="yes">Send all packets</property>
-                        <property name="icon-name">play-symbolic</property>
+                        <property name="tooltip-text" translatable="yes">Send All Packets</property>
+                        <property name="icon-name">media-playback-start-symbolic</property>
                       </object>
                     </child>
 
@@ -110,9 +110,9 @@
           </object>
         </property>
 
-        <!-- Split view content: packet fields editor -->
+        <!-- Split view content: Packet Workspace -->
         <property name="content">
-          <object class="PacketEditor" id="packet_editor"/>
+          <object class="PacketWorkspace" id="packet_workspace"/>
         </property>
 
       </object>
