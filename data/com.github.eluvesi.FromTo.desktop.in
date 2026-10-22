@@ -1,10 +1,11 @@
 [Desktop Entry]
 Name=From To
+Comment=Craft and send custom network packets
+GenericName=Network Packet Generator
 Exec=fromto
 Icon=com.github.eluvesi.FromTo
 Terminal=false
 Type=Application
-Categories=Utility;
-Keywords=GTK;
+Categories=GNOME;GTK;Network;Utility;
+Keywords=fromto;network;packet;packets;Ethernet;IP;IPv4;ICMP;TCP;UDP;
 StartupNotify=true
-DBusActivatable=true
