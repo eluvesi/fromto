@@ -4,50 +4,56 @@
   <requires lib="Adw" version="1.0"/>
 
   <template class="PacketRow" parent="AdwActionRow">
+
+    <!-- Drag handle icon in row prefix -->
     <child type="prefix">
-      <object class="GtkButton" id="send_button">
-        <property name="icon-name">send-symbolic</property>
-        <property name="tooltip-text" translatable="yes">Send packet</property>
-        <property name="valign">center</property>
-        <property name="sensitive">false</property>
+      <object class="GtkImage" id="drag_handle">
+        <property name="icon-name">list-drag-handle-symbolic</property>
+        <style>
+          <class name="dim-label"/>
+        </style>
       </object>
     </child>
 
+    <!-- Packet actions menu button in row suffix -->
     <child type="suffix">
-      <object class="GtkBox">
-        <property name="orientation">horizontal</property>
+      <object class="GtkMenuButton">
+        <property name="icon-name">view-more-horizontal-symbolic</property>
+        <property name="tooltip-text" translatable="yes">Packet Actions</property>
+        <property name="valign">center</property>
+        <property name="menu-model">packet_actions_menu</property>
         <style>
-          <class name="linked"/>
+          <class name="flat"/>
         </style>
-
-        <child>
-          <object class="GtkButton" id="up_button">
-            <property name="icon-name">go-up-symbolic</property>
-            <property name="tooltip-text" translatable="yes">Move up</property>
-            <property name="valign">center</property>
-          </object>
-        </child>
-
-        <child>
-          <object class="GtkButton" id="down_button">
-            <property name="icon-name">go-down-symbolic</property>
-            <property name="tooltip-text" translatable="yes">Move down</property>
-            <property name="valign">center</property>
-          </object>
-        </child>
-
-        <child>
-          <object class="GtkButton" id="remove_button">
-            <property name="icon-name">user-trash-symbolic</property>
-            <property name="tooltip-text" translatable="yes">Remove packet</property>
-            <property name="valign">center</property>
-            <style>
-              <class name="destructive-action"/>
-            </style>
-          </object>
-        </child>
       </object>
     </child>
 
   </template>
+
+  <menu id="packet_actions_menu">
+    <section>
+      <item>
+        <attribute name="label" translatable="yes">Send</attribute>
+        <attribute name="action">packet.send</attribute>
+      </item>
+    </section>
+    <section>
+      <item>
+        <attribute name="label" translatable="yes">Move Up</attribute>
+        <attribute name="action">packet.move-up</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">Move Down</attribute>
+        <attribute name="action">packet.move-down</attribute>
+      </item>
+    </section>
+    <section>
+      <item>
+        <attribute name="label" translatable="yes">Remove</attribute>
+        <attribute name="action">packet.remove</attribute>
+      </item>
+    </section>
+  </menu>
+
 </interface>
+

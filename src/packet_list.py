@@ -34,6 +34,11 @@ class PacketList(Gtk.Box):
             None,
             (GObject.TYPE_PYOBJECT,),
         ),
+        'send-packet': (
+            GObject.SignalFlags.RUN_LAST,
+            None,
+            (GObject.TYPE_PYOBJECT,),
+        ),
     }
 
     packet_listbox = Gtk.Template.Child()
@@ -71,6 +76,7 @@ class PacketList(Gtk.Box):
         total = index + 1
 
         row = PacketRow(packet, index, total)
+        row.connect('send-packet', self._on_send_packet)
         row.connect('move-packet', self._on_move_packet)
         row.connect('remove-packet', self._on_remove_packet)
         self._rows.append(row)
@@ -79,6 +85,13 @@ class PacketList(Gtk.Box):
         self.packet_listbox.select_row(row)
 
         self._update_rows()
+
+    def _on_send_packet(self, row):
+        """Emit a request to send the packet from the selected row."""
+        if row not in self._rows:
+            return
+
+        self.emit('send-packet', row.packet)
 
     def _on_remove_packet(self, row):
         """Remove a packet row from the list."""

@@ -17,7 +17,7 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-from gi.repository import Adw, GObject, Gtk
+from gi.repository import Adw, Gio, GObject, Gtk
 from scapy.all import Ether, ICMP, IP, TCP, UDP
 
 
@@ -26,13 +26,22 @@ class PacketRow(Adw.ActionRow):
     __gtype_name__ = 'PacketRow'
 
     __gsignals__ = {
-        'move-packet': (GObject.SignalFlags.RUN_LAST, None, (int,)),
-        'remove-packet': (GObject.SignalFlags.RUN_LAST, None, ()),
+        'send-packet': (
+            GObject.SignalFlags.RUN_LAST,
+            None,
+            (),
+        ),
+        'move-packet': (
+            GObject.SignalFlags.RUN_LAST,
+            None,
+            (int,),
+        ),
+        'remove-packet': (
+            GObject.SignalFlags.RUN_LAST,
+            None,
+            (),
+        ),
     }
-
-    up_button = Gtk.Template.Child()
-    down_button = Gtk.Template.Child()
-    remove_button = Gtk.Template.Child()
 
     def __init__(self, packet, position, total):
         super().__init__()
@@ -45,27 +54,37 @@ class PacketRow(Adw.ActionRow):
         self.set_title(title)
         self.set_subtitle(subtitle)
 
-        self.up_button.connect(
-            'clicked',
-            lambda *_: self.emit('move-packet', -1),
-        )
-        self.down_button.connect(
-            'clicked',
-            lambda *_: self.emit('move-packet', 1),
-        )
-        self.remove_button.connect(
-            'clicked',
-            lambda *_: self.emit('remove-packet'),
-        )
+        self._actions = Gio.SimpleActionGroup()
+        self.insert_action_group('packet', self._actions)
+        self.create_action('send', lambda *_: self.emit('send-packet'))
+        self.create_action('move-up', lambda *_: self.emit('move-packet', -1))
+        self.create_action('move-down', lambda *_: self.emit('move-packet', 1))
+        self.create_action('remove', lambda *_: self.emit('remove-packet'))
 
         self.update_position(position, total)
+
+    def create_action(self, name, callback):
+        """Add a row action.
+
+        Args:
+            name: the name of the action
+            callback: the function to be called when the action is activated
+        """
+        action = Gio.SimpleAction.new(name, None)
+        action.connect('activate', callback)
+        self._actions.add_action(action)
 
     def update_position(self, position, total):
         """Update packet reordering controls."""
         self.position = position
         self.total = total
-        self.up_button.set_sensitive(position > 0)
-        self.down_button.set_sensitive(position < total - 1)
+
+        self._actions.lookup_action('move-up').set_enabled(
+            position > 0
+        )
+        self._actions.lookup_action('move-down').set_enabled(
+            position < total - 1
+        )
 
     @staticmethod
     def _describe_packet(packet):
@@ -87,11 +106,6 @@ class PacketRow(Adw.ActionRow):
             source = ip_packet.src
             destination = ip_packet.dst
             network = 'IPv4'
-        elif packet.haslayer(IPv6):
-            ip_packet = packet[IPv6]
-            source = ip_packet.src
-            destination = ip_packet.dst
-            network = 'IPv6'
         else:
             network = '—'
 
@@ -106,5 +120,6 @@ class PacketRow(Adw.ActionRow):
             transport = '—'
 
         title = f'{source} → {destination}'
-        subtitle = f'{data_link} · {network} · {transport}'
+        subtitle = f'{data_link} / {network} / {transport}'
         return title, subtitle
+
