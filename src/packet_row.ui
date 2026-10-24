@@ -7,7 +7,7 @@
 
     <!-- Drag handle icon in row prefix -->
     <child type="prefix">
-      <object class="GtkImage" id="drag_handle">
+      <object class="GtkImage">
         <property name="icon-name">list-drag-handle-symbolic</property>
         <style>
           <class name="dim-label"/>

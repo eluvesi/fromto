@@ -19,12 +19,13 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-from gi.repository import Adw, Gio, GObject, Gtk
+from gi.repository import Adw, Gdk, Gio, GObject, Gtk
 from scapy.all import Ether, ICMP, IP, TCP, UDP
 
 
 @Gtk.Template(resource_path='/com/github/eluvesi/FromTo/packet_row.ui')
 class PacketRow(Adw.ActionRow):
+    """Display a packet and provide packet actions."""
     __gtype_name__ = 'PacketRow'
 
     __gsignals__ = {
@@ -43,6 +44,11 @@ class PacketRow(Adw.ActionRow):
             None,
             (),
         ),
+        'drop-packet': (
+            GObject.SignalFlags.RUN_LAST,
+            None,
+            (int, int),
+        ),
     }
 
     def __init__(self, packet, position, total):
@@ -52,10 +58,6 @@ class PacketRow(Adw.ActionRow):
         self.position = position
         self.total = total
 
-        title, subtitle = self._describe_packet(packet)
-        self.set_title(title)
-        self.set_subtitle(subtitle)
-
         self._actions = Gio.SimpleActionGroup()
         self.insert_action_group('packet', self._actions)
         self.create_action('send', lambda *_: self.emit('send-packet'))
@@ -63,7 +65,12 @@ class PacketRow(Adw.ActionRow):
         self.create_action('move-down', lambda *_: self.emit('move-packet', 1))
         self.create_action('remove', lambda *_: self.emit('remove-packet'))
 
+        title, subtitle = self._describe_packet(packet)
+        self.set_title(title)
+        self.set_subtitle(subtitle)
+
         self.update_position(position, total)
+        self._setup_drag_and_drop()
 
     def create_action(self, name, callback):
         """Add a row action.
@@ -87,6 +94,31 @@ class PacketRow(Adw.ActionRow):
         self._actions.lookup_action('move-down').set_enabled(
             position < total - 1
         )
+
+    def _setup_drag_and_drop(self):
+        """Set up drag-and-drop for this row."""
+        source = Gtk.DragSource(actions=Gdk.DragAction.MOVE)
+        source.connect('prepare', self._on_drag_prepare)
+        self.add_controller(source)
+
+        target = Gtk.DropTarget.new(
+            GObject.TYPE_INT,
+            Gdk.DragAction.MOVE,
+        )
+        target.connect('drop', self._on_drop)
+        self.add_controller(target)
+
+    def _on_drag_prepare(self, _source, _x, _y):
+        """Provide the row position as drag content."""
+        return Gdk.ContentProvider.new_for_value(self.position)
+
+    def _on_drop(self, _target, source_index, _x, _y):
+        """Request moving the dragged row to this position."""
+        if source_index == self.position:
+            return False
+
+        self.emit('drop-packet', source_index, self.position)
+        return True
 
     @staticmethod
     def _describe_packet(packet):

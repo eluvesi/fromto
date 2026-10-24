@@ -28,6 +28,7 @@ from .packet_row import PacketRow
 
 @Gtk.Template(resource_path='/com/github/eluvesi/FromTo/packet_list.ui')
 class PacketList(Gtk.Box):
+    """Display and manage an ordered list of packets."""
     __gtype_name__ = 'PacketList'
 
     __gsignals__ = {
@@ -81,6 +82,7 @@ class PacketList(Gtk.Box):
         row.connect('send-packet', self._on_send_packet)
         row.connect('move-packet', self._on_move_packet)
         row.connect('remove-packet', self._on_remove_packet)
+        row.connect('drop-packet', self._on_drop_packet)
         self._rows.append(row)
 
         self.packet_listbox.insert(row, index)
@@ -124,6 +126,17 @@ class PacketList(Gtk.Box):
 
         self._update_rows()
 
+    def _on_drop_packet(self, _row, source_index, target_index):
+        """Move a packet row to the drop position.
+
+        Args:
+            _row: The target row that emitted the signal
+            source_index: The position of the dragged row
+            target_index: The position of the target row
+        """
+        row = self._rows[source_index]
+        self._on_move_packet(row, target_index - source_index)
+
     def _on_row_selected(self, _listbox, row):
         """Emit a signal when the selected packet changes."""
         packet = row.packet if row is not None else None
@@ -134,5 +147,4 @@ class PacketList(Gtk.Box):
         total = len(self._rows)
         for index, row in enumerate(self._rows):
             row.update_position(index, total)
-
 
