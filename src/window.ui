@@ -9,111 +9,117 @@
     <property name="default-height">720</property>
 
     <property name="content">
-      <object class="AdwOverlaySplitView" id="split_view">
-        <property name="sidebar-width-fraction">0.375</property>
-        <property name="min-sidebar-width">405</property>
+      <object class="AdwToastOverlay" id="toast_overlay">
 
-        <!-- Split view sidebar: packet list and controls -->
-        <property name="sidebar">
-          <object class="AdwToolbarView">
+        <child>
+          <object class="AdwOverlaySplitView" id="split_view">
+            <property name="sidebar-width-fraction">0.375</property>
+            <property name="min-sidebar-width">405</property>
 
-            <!-- Sidebar header -->
-            <child type="top">
-              <object class="AdwHeaderBar">
-                <child type="start">
-                  <object class="GtkButton" id="open_pcap_button">
-                    <property name="icon-name">document-open-symbolic</property>
-                    <property name="tooltip-text" translatable="yes">Open…</property>
+            <!-- Split view sidebar: packet list and controls -->
+            <property name="sidebar">
+              <object class="AdwToolbarView">
+
+                <!-- Sidebar header -->
+                <child type="top">
+                  <object class="AdwHeaderBar">
+                    <child type="start">
+                      <object class="GtkButton" id="open_pcap_button">
+                        <property name="icon-name">document-open-symbolic</property>
+                        <property name="tooltip-text" translatable="yes">Open…</property>
+                      </object>
+                    </child>
+
+                    <child type="start">
+                      <object class="GtkButton" id="save_pcap_button">
+                        <property name="icon-name">document-save-symbolic</property>
+                        <property name="tooltip-text" translatable="yes">Save As…</property>
+                      </object>
+                    </child>
+
+                    <child type="end">
+                      <object class="GtkMenuButton">
+                        <property name="primary">True</property>
+                        <property name="icon-name">open-menu-symbolic</property>
+                        <property name="tooltip-text" translatable="yes">Main Menu</property>
+                        <property name="menu-model">primary_menu</property>
+                      </object>
+                    </child>
+
                   </object>
                 </child>
 
-                <child type="start">
-                  <object class="GtkButton" id="save_pcap_button">
-                    <property name="icon-name">document-save-symbolic</property>
-                    <property name="tooltip-text" translatable="yes">Save As…</property>
+                <!-- Sidebar main content: Packet List -->
+                <property name="content">
+                  <object class="GtkScrolledWindow">
+                    <child>
+                      <object class="PacketList" id="packet_list"/>
+                    </child>
+                  </object>
+                </property>
+
+                <!-- Sidebar bottom panel -->
+                <child type="bottom">
+                  <object class="GtkActionBar">
+
+                    <child>
+                      <object class="GtkBox">
+                        <property name="margin-start">6</property>
+                        <property name="margin-top">6</property>
+                        <property name="margin-bottom">6</property>
+                        <property name="spacing">12</property>
+
+                        <!-- Network interface dropdown -->
+                        <child>
+                          <object class="GtkDropDown" id="interface_dropdown">
+                            <property name="hexpand">True</property>
+                            <property name="tooltip-text" translatable="yes">Network Interface</property>
+                          </object>
+                        </child>
+
+                        <!-- Delay spin button -->
+                        <child>
+                          <object class="GtkSpinButton" id="delay_spinbutton">
+                            <property name="tooltip-text" translatable="yes">Delay Between Packets (ms)</property>
+                            <property name="adjustment">
+                              <object class="GtkAdjustment">
+                                <property name="lower">0</property>
+                                <property name="upper">10000</property>
+                                <property name="step-increment">10</property>
+                                <property name="page-increment">100</property>
+                                <property name="value">0</property>
+                              </object>
+                            </property>
+                          </object>
+                        </child>
+
+                        <!-- Send button -->
+                        <child>
+                          <object class="GtkButton" id="send_button">
+                            <style>
+                              <class name="suggested-action"/>
+                            </style>
+                            <property name="tooltip-text" translatable="yes">Send All Packets</property>
+                            <property name="icon-name">media-playback-start-symbolic</property>
+                          </object>
+                        </child>
+
+                      </object>
+                    </child>
+
                   </object>
                 </child>
 
-                <child type="end">
-                  <object class="GtkMenuButton">
-                    <property name="primary">True</property>
-                    <property name="icon-name">open-menu-symbolic</property>
-                    <property name="tooltip-text" translatable="yes">Main Menu</property>
-                    <property name="menu-model">primary_menu</property>
-                  </object>
-                </child>
-
-              </object>
-            </child>
-
-            <!-- Sidebar main content: Packet List -->
-            <property name="content">
-              <object class="GtkScrolledWindow">
-                <child>
-                  <object class="PacketList" id="packet_list"/>
-                </child>
               </object>
             </property>
 
-            <!-- Sidebar bottom panel -->
-            <child type="bottom">
-              <object class="GtkActionBar">
-
-                <child>
-                  <object class="GtkBox">
-                    <property name="margin-start">6</property>
-                    <property name="margin-top">6</property>
-                    <property name="margin-bottom">6</property>
-                    <property name="spacing">12</property>
-
-                    <!-- Network interface dropdown -->
-                    <child>
-                      <object class="GtkDropDown" id="interface_dropdown">
-                        <property name="hexpand">True</property>
-                        <property name="tooltip-text" translatable="yes">Network Interface</property>
-                      </object>
-                    </child>
-
-                    <!-- Delay spin button -->
-                    <child>
-                      <object class="GtkSpinButton" id="delay_spinbutton">
-                        <property name="tooltip-text" translatable="yes">Delay Between Packets (ms)</property>
-                        <property name="adjustment">
-                          <object class="GtkAdjustment">
-                            <property name="lower">0</property>
-                            <property name="upper">10000</property>
-                            <property name="step-increment">10</property>
-                            <property name="page-increment">100</property>
-                            <property name="value">0</property>
-                          </object>
-                        </property>
-                      </object>
-                    </child>
-
-                    <!-- Send button -->
-                    <child>
-                      <object class="GtkButton" id="send_button">
-                        <style>
-                          <class name="suggested-action"/>
-                        </style>
-                        <property name="tooltip-text" translatable="yes">Send All Packets</property>
-                        <property name="icon-name">media-playback-start-symbolic</property>
-                      </object>
-                    </child>
-
-                  </object>
-                </child>
-
-              </object>
-            </child>
+            <!-- Split view content: Packet Workspace -->
+            <property name="content">
+              <object class="PacketWorkspace" id="packet_workspace"/>
+            </property>
 
           </object>
-        </property>
-
-        <!-- Split view content: Packet Workspace -->
-        <property name="content">
-          <object class="PacketWorkspace" id="packet_workspace"/>
-        </property>
+        </child>
 
       </object>
     </property>

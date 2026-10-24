@@ -28,6 +28,7 @@ from .packet_workspace import PacketWorkspace
 class FromtoWindow(Adw.ApplicationWindow):
     __gtype_name__ = 'FromtoWindow'
 
+    toast_overlay = Gtk.Template.Child()
     packet_list = Gtk.Template.Child()
     packet_workspace = Gtk.Template.Child()
     interface_dropdown = Gtk.Template.Child()
@@ -37,8 +38,15 @@ class FromtoWindow(Adw.ApplicationWindow):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
-        self.packet_list.connect('packet-selected', self._on_packet_selected)
-        self.packet_list.connect('send-packet', self._on_send_packet)
+        self.packet_list.connect(
+            'packet-selected', self._on_packet_selected
+        )
+        self.packet_list.connect(
+            'send-packet', self._on_send_packet
+        )
+        self.packet_workspace.connect(
+            'toast-requested', self._on_toast_requested
+        )
 
         # Sending remains disabled until it is implemented.
         self.send_button.set_sensitive(False)
@@ -55,47 +63,30 @@ class FromtoWindow(Adw.ApplicationWindow):
         """Display the selected packet in the packet workspace."""
         self.packet_workspace.set_packet(packet)
 
-    def _show_message(self, heading, body):
-        """Show a message dialog."""
-        dialog = Adw.MessageDialog(
-            transient_for=self,
-            heading=heading,
-            body=body,
-        )
-        dialog.add_response('close', 'Close')
-        dialog.set_close_response('close')
-        dialog.present()
-
     def _on_send_packet(self, _packet_list, packet):
         """Send one packet using the selected network interface."""
         selected_item = self.interface_dropdown.get_selected_item()
 
         if selected_item is None:
-            self._show_message(
-                'No interface selected',
-                'Select a network interface before sending a packet.',
-            )
+            self.show_toast(_('No Network Interface Selected'))
             return
 
         interface = selected_item.get_string()
 
         try:
-            sendp(
-                packet,
-                iface=interface,
-                count=1,
-                verbose=False,
-            )
+            sendp(packet, iface=interface, count=1, verbose=False)
         except Exception as error:
-            self._show_message(
-                'Packet sending failed',
-                f'Interface: {interface}\n'
-                f'{type(error).__name__}: {error}',
-            )
+            self.show_toast(_('Packet Sending Failed'))
             return
 
-        self._show_message(
-            'Packet sent',
-            f'Scapy completed the send operation on {interface}.',
-        )
+        self.show_toast(_('Packet Sent'))
+
+    def _on_toast_requested(self, _source, message):
+        """Display a toast requested by the packet workspace."""
+        self.show_toast(message)
+
+    def show_toast(self, message):
+        """Show a brief notification in the application window."""
+        self.toast_overlay.dismiss_all()
+        self.toast_overlay.add_toast(Adw.Toast.new(message))
 

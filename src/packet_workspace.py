@@ -20,7 +20,7 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 
-from gi.repository import Adw, Gtk
+from gi.repository import Adw, GObject, Gtk
 
 from .preview_page import PreviewPage
 
@@ -29,12 +29,24 @@ from .preview_page import PreviewPage
 class PacketWorkspace(Gtk.Box):
     __gtype_name__ = 'PacketWorkspace'
 
+    __gsignals__ = {
+        'toast-requested': (
+            GObject.SignalFlags.RUN_LAST,
+            None,
+            (str,),
+        ),
+    }
+
     editor_page = Gtk.Template.Child()
     preview_page = Gtk.Template.Child()
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self._packet = None
+
+        self.preview_page.connect(
+            'toast-requested', self._on_toast_requested
+        )
 
     @property
     def packet(self):
@@ -51,4 +63,8 @@ class PacketWorkspace(Gtk.Box):
         """Refresh page representations after the packet has changed."""
         # EditPage will be added here when its widget is implemented.
         self.preview_page.refresh()
+
+    def _on_toast_requested(self, _source, message):
+        """Forward toast requests from workspace pages."""
+        self.emit('toast-requested', message)
 
