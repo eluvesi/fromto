@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schemalist gettext-domain="fromto">
 	<schema id="com.github.eluvesi.FromTo" path="/com/github/eluvesi/FromTo/">
+	  <key name="color-scheme" type="s">
+      <default>'system'</default>
+      <summary>Application theme</summary>
+      <description>
+        The color scheme used by the application.
+      </description>
+    </key>
 	</schema>
 </schemalist>

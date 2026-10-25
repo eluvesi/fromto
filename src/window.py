@@ -53,6 +53,11 @@ class FromtoWindow(Adw.ApplicationWindow):
 
         self._populate_interfaces()
 
+    def show_toast(self, message):
+        """Show a brief notification in the application window."""
+        self.toast_overlay.dismiss_all()
+        self.toast_overlay.add_toast(Adw.Toast.new(message))
+
     def _populate_interfaces(self):
         """Populate the interface dropdown using Scapy."""
         interfaces = get_if_list()
@@ -75,7 +80,7 @@ class FromtoWindow(Adw.ApplicationWindow):
 
         try:
             sendp(packet, iface=interface, count=1, verbose=False)
-        except Exception as error:
+        except Exception:
             self.show_toast(_('Packet Sending Failed'))
             return
 
@@ -84,9 +89,4 @@ class FromtoWindow(Adw.ApplicationWindow):
     def _on_toast_requested(self, _source, message):
         """Display a toast requested by the packet workspace."""
         self.show_toast(message)
-
-    def show_toast(self, message):
-        """Show a brief notification in the application window."""
-        self.toast_overlay.dismiss_all()
-        self.toast_overlay.add_toast(Adw.Toast.new(message))
 

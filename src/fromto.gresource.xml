@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
   <gresource prefix="/com/github/eluvesi/FromTo">
-    <file preprocess="xml-stripblanks">packet_list.ui</file>
-    <file preprocess="xml-stripblanks">packet_row.ui</file>
-    <file preprocess="xml-stripblanks">packet_workspace.ui</file>
-    <file preprocess="xml-stripblanks">preview_page.ui</file>
+    <file preprocess="xml-stripblanks">packet-list.ui</file>
+    <file preprocess="xml-stripblanks">packet-row.ui</file>
+    <file preprocess="xml-stripblanks">packet-workspace.ui</file>
+    <file preprocess="xml-stripblanks">preferences-dialog.ui</file>
+    <file preprocess="xml-stripblanks">preview-page.ui</file>
     <file preprocess="xml-stripblanks">shortcuts-dialog.ui</file>
     <file preprocess="xml-stripblanks">window.ui</file>
   </gresource>

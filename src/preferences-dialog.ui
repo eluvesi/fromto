@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk" version="4.0"/>
+  <requires lib="Adw" version="1.5"/>
+
+  <object class="AdwPreferencesDialog" id="preferences_dialog">
+    <property name="title" translatable="yes">Preferences</property>
+
+    <child>
+      <object class="AdwPreferencesPage">
+        <property name="title" translatable="yes">General</property>
+        <property name="icon-name">preferences-system-symbolic</property>
+
+        <child>
+          <object class="AdwPreferencesGroup">
+            <property name="title" translatable="yes">Appearance</property>
+
+            <child>
+              <object class="AdwActionRow">
+                <property name="title" translatable="yes">Color Scheme</property>
+
+                <child type="suffix">
+                   <object class="AdwToggleGroup" id="color_scheme_togglegroup">
+                     <property name="margin-bottom">9</property>
+                     <property name="margin-top">9</property>
+                     <property name="active-name">system</property>
+
+                     <child>
+                       <object class="AdwToggle">
+                         <property name="icon-name">computer-symbolic</property>
+                         <property name="tooltip" translatable="yes">Follow System</property>
+                         <property name="name">system</property>
+                       </object>
+                     </child>
+
+                     <child>
+                       <object class="AdwToggle">
+                         <property name="icon-name">weather-clear-symbolic</property>
+                         <property name="tooltip" translatable="yes">Light</property>
+                         <property name="name">light</property>
+                       </object>
+                     </child>
+
+                     <child>
+                       <object class="AdwToggle">
+                         <property name="icon-name">weather-clear-night-symbolic</property>
+                         <property name="tooltip" translatable="yes">Dark</property>
+                         <property name="name">dark</property>
+                       </object>
+                     </child>
+
+                   </object>
+                </child>
+
+              </object>
+            </child>
+
+          </object>
+        </child>
+
+      </object>
+    </child>
+
+  </object>
+</interface>
+

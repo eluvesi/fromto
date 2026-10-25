@@ -26,7 +26,7 @@ from itertools import count
 from .packet_row import PacketRow
 
 
-@Gtk.Template(resource_path='/com/github/eluvesi/FromTo/packet_list.ui')
+@Gtk.Template(resource_path='/com/github/eluvesi/FromTo/packet-list.ui')
 class PacketList(Gtk.Box):
     """Display and manage an ordered list of packets."""
     __gtype_name__ = 'PacketList'

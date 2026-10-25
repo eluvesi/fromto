@@ -19,7 +19,7 @@
     <child type="suffix">
       <object class="GtkMenuButton">
         <property name="icon-name">view-more-horizontal-symbolic</property>
-        <property name="tooltip-text" translatable="yes">Packet Menu</property>
+        <property name="tooltip-text" translatable="yes">Actions Menu</property>
         <property name="valign">center</property>
         <property name="menu-model">packet_menu</property>
         <style>

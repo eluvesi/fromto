@@ -39,6 +39,13 @@ class FromtoApplication(Adw.Application):
             resource_base_path='/com/github/eluvesi/FromTo',
         )
 
+        self.settings = Gio.Settings.new('com.github.eluvesi.FromTo')
+        self.settings.connect(
+            'changed::color-scheme',
+            self._apply_color_scheme,
+        )
+        self._apply_color_scheme()
+
         self.create_action(
             'quit',
             lambda *_: self.quit(),
@@ -82,7 +89,21 @@ class FromtoApplication(Adw.Application):
 
     def on_preferences_action(self, widget, _):
         """Callback for the app.preferences action."""
-        print('app.preferences action activated')
+        if not hasattr(self, 'preferences_dialog'):
+            builder = Gtk.Builder.new_from_resource(
+                '/com/github/eluvesi/FromTo/preferences-dialog.ui'
+            )
+
+            self.preferences_dialog = builder.get_object('preferences_dialog')
+
+            self.settings.bind(
+                'color-scheme',
+                builder.get_object('color_scheme_togglegroup'),
+                'active-name',
+                Gio.SettingsBindFlags.DEFAULT,
+            )
+
+        self.preferences_dialog.present(self.props.active_window)
 
     def create_action(self, name, callback, shortcuts=None):
         """Add an application action.
@@ -98,6 +119,20 @@ class FromtoApplication(Adw.Application):
         self.add_action(action)
         if shortcuts:
             self.set_accels_for_action(f"app.{name}", shortcuts)
+
+    def _apply_color_scheme(self, *args):
+        """Apply the saved application color scheme."""
+        scheme = self.settings.get_string('color-scheme')
+
+        match scheme:
+            case 'light':
+                color_scheme = Adw.ColorScheme.FORCE_LIGHT
+            case 'dark':
+                color_scheme = Adw.ColorScheme.FORCE_DARK
+            case _:
+                color_scheme = Adw.ColorScheme.DEFAULT
+
+        Adw.StyleManager.get_default().set_color_scheme(color_scheme)
 
 
 def main(version):
