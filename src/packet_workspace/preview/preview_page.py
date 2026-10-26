@@ -24,7 +24,10 @@ from gi.repository import Adw, Gdk, GObject, Gtk
 from scapy.all import hexdump
 
 
-@Gtk.Template(resource_path='/com/github/eluvesi/FromTo/preview-page.ui')
+@Gtk.Template(
+    resource_path =
+    '/com/github/eluvesi/FromTo/packet_workspace/preview/preview-page.ui'
+)
 class PreviewPage(Gtk.Box):
     """Display a packet summary, field details, and hexadecimal dump."""
 

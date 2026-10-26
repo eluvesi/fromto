@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk" version="4.0"/>
+  <requires lib="Adw" version="1.0"/>
+
+  <template class="UDPSettingsGroup" parent="AdwPreferencesGroup">
+
+    <child>
+      <object class="AdwSpinRow" id="sport_spinrow">
+        <property name="title" translatable="yes">Source Port</property>
+        <property name="adjustment">
+          <object class="GtkAdjustment">
+            <property name="lower">0</property>
+            <property name="upper">65535</property>
+            <property name="step-increment">1</property>
+            <property name="page-increment">1024</property>
+            <property name="value">53</property>
+          </object>
+        </property>
+
+        <child type="suffix">
+          <object class="GtkButton" id="sport_restore_button">
+            <property name="icon-name">view-refresh-symbolic</property>
+            <property name="tooltip-text" translatable="yes">Restore Default</property>
+            <property name="valign">center</property>
+            <style>
+              <class name="flat"/>
+            </style>
+          </object>
+        </child>
+
+      </object>
+    </child>
+
+    <child>
+      <object class="AdwSpinRow" id="dport_spinrow">
+        <property name="title" translatable="yes">Destination Port</property>
+        <property name="adjustment">
+          <object class="GtkAdjustment">
+            <property name="lower">0</property>
+            <property name="upper">65535</property>
+            <property name="step-increment">1</property>
+            <property name="page-increment">1024</property>
+            <property name="value">53</property>
+          </object>
+        </property>
+
+        <child type="suffix">
+          <object class="GtkButton" id="dport_restore_button">
+            <property name="icon-name">view-refresh-symbolic</property>
+            <property name="tooltip-text" translatable="yes">Restore Default</property>
+            <property name="valign">center</property>
+            <style>
+              <class name="flat"/>
+            </style>
+          </object>
+        </child>
+
+      </object>
+    </child>
+
+    <child>
+      <object class="AdwSpinRow" id="len_spinrow">
+        <property name="title" translatable="yes">Total Length</property>
+        <property name="adjustment">
+          <object class="GtkAdjustment">
+            <property name="lower">0</property>
+            <property name="upper">65535</property>
+            <property name="step-increment">1</property>
+            <property name="page-increment">1024</property>
+            <property name="value">0</property>
+          </object>
+        </property>
+
+        <child type="suffix">
+          <object class="GtkButton" id="len_restore_button">
+            <property name="icon-name">view-refresh-symbolic</property>
+            <property name="tooltip-text" translatable="yes">Restore Default</property>
+            <property name="valign">center</property>
+            <style>
+              <class name="flat"/>
+            </style>
+          </object>
+        </child>
+
+      </object>
+    </child>
+
+    <child>
+      <object class="AdwSpinRow" id="chksum_spinrow">
+        <property name="title" translatable="yes">Header Checksum</property>
+        <property name="adjustment">
+          <object class="GtkAdjustment">
+            <property name="lower">0</property>
+            <property name="upper">65535</property>
+            <property name="step-increment">1</property>
+            <property name="page-increment">1024</property>
+            <property name="value">0</property>
+          </object>
+        </property>
+
+        <child type="suffix">
+          <object class="GtkButton" id="chksum_restore_button">
+            <property name="icon-name">view-refresh-symbolic</property>
+            <property name="tooltip-text" translatable="yes">Restore Default</property>
+            <property name="valign">center</property>
+            <style>
+              <class name="flat"/>
+            </style>
+          </object>
+        </child>
+
+      </object>
+    </child>
+
+  </template>
+
+</interface>
+  

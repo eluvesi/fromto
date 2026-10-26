@@ -1,13 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
   <gresource prefix="/com/github/eluvesi/FromTo">
-    <file preprocess="xml-stripblanks">packet-list.ui</file>
-    <file preprocess="xml-stripblanks">packet-row.ui</file>
-    <file preprocess="xml-stripblanks">packet-workspace.ui</file>
-    <file preprocess="xml-stripblanks">preferences-dialog.ui</file>
-    <file preprocess="xml-stripblanks">preview-page.ui</file>
-    <file preprocess="xml-stripblanks">shortcuts-dialog.ui</file>
     <file preprocess="xml-stripblanks">window.ui</file>
+    <file preprocess="xml-stripblanks">preferences-dialog.ui</file>
+    <file preprocess="xml-stripblanks">shortcuts-dialog.ui</file>
+
+    <file preprocess="xml-stripblanks">packet_list/packet-list.ui</file>
+    <file preprocess="xml-stripblanks">packet_list/packet-row.ui</file>
+
+    <file preprocess="xml-stripblanks">packet_workspace/packet-workspace.ui</file>
+
+    <file preprocess="xml-stripblanks">packet_workspace/editor/editor-page.ui</file>
+    <file preprocess="xml-stripblanks">packet_workspace/editor/protocols/ethernet.ui</file>
+    <file preprocess="xml-stripblanks">packet_workspace/editor/protocols/ipv4.ui</file>
+    <file preprocess="xml-stripblanks">packet_workspace/editor/protocols/icmp.ui</file>
+    <file preprocess="xml-stripblanks">packet_workspace/editor/protocols/tcp.ui</file>
+    <file preprocess="xml-stripblanks">packet_workspace/editor/protocols/udp.ui</file>
+
+    <file preprocess="xml-stripblanks">packet_workspace/preview/preview-page.ui</file>
   </gresource>
 </gresources>
 

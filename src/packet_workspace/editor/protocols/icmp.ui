@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk" version="4.0"/>
+  <requires lib="Adw" version="1.0"/>
+
+  <template class="ICMPSettingsGroup" parent="AdwPreferencesGroup">
+
+    <child>
+      <object class="AdwActionRow" id="type_actionrow">
+        <property name="title" translatable="yes">Type</property>
+
+        <child type="suffix">
+          <object class="AdwToggleGroup" id="type_togglegroup">
+            <property name="valign">center</property>
+
+            <child>
+              <object class="AdwToggle">
+                <property name="icon-name">network-transmit-symbolic</property>
+                <property name="tooltip" translatable="yes">Echo Request</property>
+                <property name="name">echo-request</property>
+              </object>
+            </child>
+
+            <child>
+              <object class="AdwToggle">
+                <property name="icon-name">network-receive-symbolic</property>
+                <property name="tooltip" translatable="yes">Echo Reply</property>
+                <property name="name">echo-reply</property>
+              </object>
+            </child>
+
+          </object>
+        </child>
+
+      </object>
+    </child>
+
+    <child>
+      <object class="AdwSpinRow" id="code_spinrow">
+        <property name="title" translatable="yes">Code</property>
+        <property name="adjustment">
+          <object class="GtkAdjustment">
+            <property name="lower">0</property>
+            <property name="upper">255</property>
+            <property name="step-increment">1</property>
+            <property name="page-increment">16</property>
+            <property name="value">0</property>
+          </object>
+        </property>
+
+        <child type="suffix">
+          <object class="GtkButton" id="code_restore_button">
+            <property name="icon-name">view-refresh-symbolic</property>
+            <property name="tooltip-text" translatable="yes">Restore Default</property>
+            <property name="valign">center</property>
+            <style>
+              <class name="flat"/>
+            </style>
+          </object>
+        </child>
+
+      </object>
+    </child>
+
+    <child>
+      <object class="AdwSpinRow" id="chksum_spinrow">
+        <property name="title" translatable="yes">Header Checksumh</property>
+        <property name="adjustment">
+          <object class="GtkAdjustment">
+            <property name="lower">0</property>
+            <property name="upper">65535</property>
+            <property name="step-increment">1</property>
+            <property name="page-increment">1024</property>
+            <property name="value">0</property>
+          </object>
+        </property>
+
+        <child type="suffix">
+          <object class="GtkButton" id="chksum_restore_button">
+            <property name="icon-name">view-refresh-symbolic</property>
+            <property name="tooltip-text" translatable="yes">Restore Default</property>
+            <property name="valign">center</property>
+            <style>
+              <class name="flat"/>
+            </style>
+          </object>
+        </child>
+
+      </object>
+    </child>
+
+    <child>
+      <object class="AdwSpinRow" id="id_spinrow">
+        <property name="title" translatable="yes">Identification</property>
+        <property name="adjustment">
+          <object class="GtkAdjustment">
+            <property name="lower">0</property>
+            <property name="upper">65535</property>
+            <property name="step-increment">1</property>
+            <property name="page-increment">1024</property>
+            <property name="value">0</property>
+          </object>
+        </property>
+
+        <child type="suffix">
+          <object class="GtkButton" id="id_restore_button">
+            <property name="icon-name">view-refresh-symbolic</property>
+            <property name="tooltip-text" translatable="yes">Restore Default</property>
+            <property name="valign">center</property>
+            <style>
+              <class name="flat"/>
+            </style>
+          </object>
+        </child>
+
+      </object>
+    </child>
+
+    <child>
+      <object class="AdwSpinRow" id="seq_spinrow">
+        <property name="title" translatable="yes">Sequence Number</property>
+        <property name="adjustment">
+          <object class="GtkAdjustment">
+            <property name="lower">0</property>
+            <property name="upper">65535</property>
+            <property name="step-increment">1</property>
+            <property name="page-increment">1024</property>
+            <property name="value">0</property>
+          </object>
+        </property>
+
+        <child type="suffix">
+          <object class="GtkButton" id="seq_restore_button">
+            <property name="icon-name">view-refresh-symbolic</property>
+            <property name="tooltip-text" translatable="yes">Restore Default</property>
+            <property name="valign">center</property>
+            <style>
+              <class name="flat"/>
+            </style>
+          </object>
+        </child>
+
+      </object>
+    </child>
+
+  </template>
+
+</interface>
+  

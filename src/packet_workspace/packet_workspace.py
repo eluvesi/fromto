@@ -22,10 +22,14 @@
 
 from gi.repository import Adw, GObject, Gtk
 
+from .editor_page import EditorPage
 from .preview_page import PreviewPage
 
 
-@Gtk.Template(resource_path='/com/github/eluvesi/FromTo/packet-workspace.ui')
+@Gtk.Template(
+    resource_path =
+    '/com/github/eluvesi/FromTo/packet_workspace/packet-workspace.ui'
+)
 class PacketWorkspace(Gtk.Box):
     __gtype_name__ = 'PacketWorkspace'
 

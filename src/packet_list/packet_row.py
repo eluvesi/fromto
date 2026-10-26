@@ -23,7 +23,9 @@ from gi.repository import Adw, Gdk, Gio, GObject, Gtk
 from scapy.all import Ether, ICMP, IP, TCP, UDP
 
 
-@Gtk.Template(resource_path='/com/github/eluvesi/FromTo/packet-row.ui')
+@Gtk.Template(
+    resource_path='/com/github/eluvesi/FromTo/packet_list/packet-row.ui'
+)
 class PacketRow(Adw.ActionRow):
     """Display a packet and provide packet actions."""
     __gtype_name__ = 'PacketRow'

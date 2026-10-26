@@ -30,10 +30,16 @@ fromto_sources = [
   '__init__.py',
   'main.py',
   'window.py',
-  'packet_list.py',
-  'packet_row.py',
-  'packet_workspace.py',
-  'preview_page.py',
+  'packet_list/packet_list.py',
+  'packet_list/packet_row.py',
+  'packet_workspace/packet_workspace.py',
+  'packet_workspace/editor/editor_page.py',
+  'packet_workspace/editor/protocols/ethernet.py',
+  'packet_workspace/editor/protocols/ipv4.py',
+  'packet_workspace/editor/protocols/icmp.py',
+  'packet_workspace/editor/protocols/tcp.py',
+  'packet_workspace/editor/protocols/udp.py',
+  'packet_workspace/preview/preview_page.py',
 ]
 
 install_data(fromto_sources, install_dir: moduledir)

@@ -32,21 +32,11 @@
                 <property name="title" translatable="yes">Editor</property>
                 <property name="icon-name">document-edit-symbolic</property>
 
-                <property name="child">
-                  <object class="GtkScrolledWindow" id="editor_page">
-                    <property name="child">
-                      <object class="GtkBox">
-                        <property name="orientation">vertical</property>
-
-                        <child>
-                          <object class="GtkLabel">
-                            <property name="label" translatable="yes">Packet fields editor</property>
-                            <property name="wrap">True</property>
-                          </object>
-                        </child>
-
-                      </object>
-                    </property>
+                 <property name="child">
+                   <object class="GtkScrolledWindow">
+                     <child>
+                       <object class="EditorPage" id="editor_page"/>
+                     </child>
                   </object>
                 </property>
 
@@ -61,7 +51,11 @@
                 <property name="icon-name">view-reveal-symbolic</property>
 
                 <property name="child">
-                  <object class="PreviewPage" id="preview_page"/>
+                  <object class="GtkScrolledWindow">
+                     <child>
+                       <object class="PreviewPage" id="preview_page"/>
+                     </child>
+                  </object>
                 </property>
 
               </object>

@@ -26,7 +26,9 @@ from itertools import count
 from .packet_row import PacketRow
 
 
-@Gtk.Template(resource_path='/com/github/eluvesi/FromTo/packet-list.ui')
+@Gtk.Template(
+    resource_path='/com/github/eluvesi/FromTo/packet_list/packet-list.ui'
+)
 class PacketList(Gtk.Box):
     """Display and manage an ordered list of packets."""
     __gtype_name__ = 'PacketList'
@@ -68,8 +70,8 @@ class PacketList(Gtk.Box):
         number = next(self._packet_counter) % 4 + 1
         return (
             Ether()
-            / IP(src=f'192.0.2.{number}', dst=f'192.0.2.{number}')
-            / UDP(sport=50000+number, dport=53)
+            / IP(src=f'127.0.0.1', dst=f'127.0.0.1')
+            / ICMP()
         )
 
     def _on_add_packet(self, *_args):
