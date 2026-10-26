@@ -19,6 +19,7 @@
         <child>
           <object class="GtkBox">
             <property name="orientation">vertical</property>
+            <property name="vexpand">true</property>
             <property name="spacing">24</property>
 
             <!-- Packet Summary textview (Scapy: packet.summary()) -->
@@ -55,23 +56,18 @@
                 </child>
 
                 <child>
-                  <object class="GtkScrolledWindow">
-
-                    <child>
-                      <object class="GtkTextView" id="summary_textview">
-                        <property name="editable">false</property>
-                        <property name="cursor-visible">false</property>
-                        <property name="monospace">true</property>
-                        <property name="left-margin">12</property>
-                        <property name="right-margin">12</property>
-                        <property name="top-margin">12</property>
-                        <property name="bottom-margin">12</property>
-                        <style>
-                          <class name="card"/>
-                        </style>
-                      </object>
-                    </child>
-
+                  <object class="GtkTextView" id="summary_textview">
+                    <property name="editable">false</property>
+                    <property name="cursor-visible">false</property>
+                    <property name="monospace">true</property>
+                    <property name="left-margin">12</property>
+                    <property name="right-margin">12</property>
+                    <property name="top-margin">12</property>
+                    <property name="bottom-margin">12</property>
+                    <property name="vscroll-policy">natural</property>
+                    <style>
+                      <class name="card"/>
+                    </style>
                   </object>
                 </child>
 
@@ -83,7 +79,6 @@
               <object class="GtkBox">
                 <property name="orientation">vertical</property>
                 <property name="spacing">12</property>
-                <property name="vexpand">true</property>
 
                 <child>
                   <object class="GtkBox">
@@ -113,24 +108,18 @@
                 </child>
 
                 <child>
-                  <object class="GtkScrolledWindow">
-                    <property name="vexpand">true</property>
-
-                    <child>
-                      <object class="GtkTextView" id="details_textview">
-                        <property name="editable">false</property>
-                        <property name="cursor-visible">false</property>
-                        <property name="monospace">true</property>
-                        <property name="left-margin">12</property>
-                        <property name="right-margin">12</property>
-                        <property name="top-margin">12</property>
-                        <property name="bottom-margin">12</property>
-                        <style>
-                          <class name="card"/>
-                        </style>
-                      </object>
-                    </child>
-
+                  <object class="GtkTextView" id="details_textview">
+                    <property name="editable">false</property>
+                    <property name="cursor-visible">false</property>
+                    <property name="monospace">true</property>
+                    <property name="left-margin">12</property>
+                    <property name="right-margin">12</property>
+                    <property name="top-margin">12</property>
+                    <property name="bottom-margin">12</property>
+                    <property name="vscroll-policy">natural</property>
+                    <style>
+                      <class name="card"/>
+                    </style>
                   </object>
                 </child>
 
@@ -142,7 +131,6 @@
               <object class="GtkBox">
                 <property name="orientation">vertical</property>
                 <property name="spacing">12</property>
-                <property name="vexpand">true</property>
 
                 <child>
                   <object class="GtkBox">
@@ -172,24 +160,18 @@
                 </child>
 
                 <child>
-                  <object class="GtkScrolledWindow">
-                    <property name="vexpand">true</property>
-
-                    <child>
-                      <object class="GtkTextView" id="hexdump_textview">
-                        <property name="editable">false</property>
-                        <property name="cursor-visible">false</property>
-                        <property name="monospace">true</property>
-                        <property name="left-margin">12</property>
-                        <property name="right-margin">12</property>
-                        <property name="top-margin">12</property>
-                        <property name="bottom-margin">12</property>
-                        <style>
-                          <class name="card"/>
-                        </style>
-                      </object>
-                    </child>
-
+                  <object class="GtkTextView" id="hexdump_textview">
+                    <property name="editable">false</property>
+                    <property name="cursor-visible">false</property>
+                    <property name="monospace">true</property>
+                    <property name="left-margin">12</property>
+                    <property name="right-margin">12</property>
+                    <property name="top-margin">12</property>
+                    <property name="bottom-margin">12</property>
+                    <property name="vscroll-policy">natural</property>
+                    <style>
+                      <class name="card"/>
+                    </style>
                   </object>
                 </child>
 
