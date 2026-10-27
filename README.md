@@ -2,7 +2,7 @@
 
 [![GNU GPL v3.0 or later](https://img.shields.io/badge/GNU_GPL_3.0_or_later-bd0000?logo=gplv3&logoColor=ffffff)](COPYING)
 [![Made for GNOME](https://img.shields.io/badge/Made_for_GNOME-3584e4?logo=gnome&logoColor=ffffff)](https://www.gnome.org/)
-[![Please Don't Theme](https://stopthemingmy.app/badge.svg)](https://stopthemingmy.app/)
+[![Please do not theme this app](https://stopthemingmy.app/badge.svg)](https://stopthemingmy.app)
 
 ![From To Icon](./data/icons/hicolor/scalable/apps/com.github.eluvesi.FromTo.svg)
 
@@ -53,6 +53,6 @@ Package names and installation commands may differ on other distributions.
    To uninstall the application, run:
 
    ```
-   sudo ninja -C build uninstall
+   sudo ninja uninstall -C build
    ```
 
