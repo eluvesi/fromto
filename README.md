@@ -15,7 +15,8 @@ Built with GTK and libadwaita, From To follows GNOME design philosophy and integ
 
 ## Screenshots
 
-![Screenshot](./data/screenshots/main.png)
+![Screenshot](./data/screenshots/editor_page.png)
+![Screenshot](./data/screenshots/preview_page.png)
 
 
 ## Building
