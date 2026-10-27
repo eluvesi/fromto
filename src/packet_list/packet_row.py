@@ -55,10 +55,7 @@ class PacketRow(Adw.ActionRow):
 
     def __init__(self, packet, position, total):
         super().__init__()
-
-        self.packet = packet
-        self.position = position
-        self.total = total
+        self.set_packet(packet)
 
         self._actions = Gio.SimpleActionGroup()
         self.insert_action_group('packet', self._actions)
@@ -67,11 +64,8 @@ class PacketRow(Adw.ActionRow):
         self.create_action('move-down', lambda *_: self.emit('move-packet', 1))
         self.create_action('remove', lambda *_: self.emit('remove-packet'))
 
-        title, subtitle = self._describe_packet(packet)
-        self.set_title(title)
-        self.set_subtitle(subtitle)
-
         self.update_position(position, total)
+
         self._setup_drag_and_drop()
 
     def create_action(self, name, callback):
@@ -84,6 +78,13 @@ class PacketRow(Adw.ActionRow):
         action = Gio.SimpleAction.new(name, None)
         action.connect('activate', callback)
         self._actions.add_action(action)
+
+    def set_packet(self, packet):
+        """Replace the packet and update its description."""
+        self.packet = packet
+        title, subtitle = self._describe_packet(packet)
+        self.set_title(title)
+        self.set_subtitle(subtitle)
 
     def update_position(self, position, total):
         """Update packet reordering controls."""

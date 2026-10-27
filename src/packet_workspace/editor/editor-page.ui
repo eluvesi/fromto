@@ -6,73 +6,112 @@
   <template class="EditorPage" parent="GtkBox">
     <property name="orientation">vertical</property>
 
-    <!-- AdwClamp used to constrain the width of child widgets -->
     <child>
-      <object class="AdwClamp">
-        <property name="maximum-size">650</property>
-        <property name="tightening-threshold">650</property>
-        <property name="margin-start">12</property>
-        <property name="margin-end">12</property>
-        <property name="margin-bottom">12</property>
+      <object class="GtkStack" id="editor_stack">
+        <property name="transition-type">crossfade</property>
 
+        <!-- Placeholder: when no packet selected -->
         <child>
-          <object class="GtkBox">
-            <property name="orientation">vertical</property>
-            <property name="spacing">24</property>
+          <object class="GtkStackPage">
+            <property name="name">empty</property>
 
-            <!-- Data Link Layer -->
-            <child>
-              <object class="AdwPreferencesGroup">
-                <property name="title" translatable="yes">Data Link Layer</property>
+            <property name="child">
+              <object class="AdwStatusPage">
+                <property name="title" translatable="yes">Packet Fields Editor</property>
+                <property name="description" translatable="yes">Select a packet to edit its fields</property>
+                <property name="icon-name">document-edit-symbolic</property>
+              </object>
+            </property>
 
+          </object>
+        </child>
+
+        <!-- Editor Page content: when packet selected -->
+        <child>
+          <object class="GtkStackPage">
+            <property name="name">content</property>
+
+            <property name="child">
+              <object class="GtkScrolledWindow">
+
+                <!-- AdwClamp used to constrain the width of child widgets -->
                 <child>
-                  <object class="AdwComboRow" id="data_link_protocol_row">
-                    <property name="title" translatable="yes">Protocol</property>
+                  <object class="AdwClamp">
+                    <property name="maximum-size">650</property>
+                    <property name="tightening-threshold">650</property>
+                    <property name="margin-start">12</property>
+                    <property name="margin-end">12</property>
+                    <property name="margin-bottom">12</property>
+
+                    <!-- Vertical GtkBox of three Layers -->
+                    <child>
+                      <object class="GtkBox">
+                        <property name="orientation">vertical</property>
+                        <property name="vexpand">true</property>
+                        <property name="spacing">24</property>
+
+                        <!-- Data Link Layer -->
+                        <child>
+                          <object class="AdwPreferencesGroup">
+                            <property name="title" translatable="yes">Data Link Layer</property>
+
+                            <child>
+                              <object class="AdwComboRow" id="data_link_protocol_comborow">
+                                <property name="title" translatable="yes">Protocol</property>
+                              </object>
+                            </child>
+
+                          </object>
+                        </child>
+
+                        <child>
+                          <object class="GtkStack" id="data_link_protocols_stack"/>
+                        </child>
+
+                        <!-- Network Layer -->
+                        <child>
+                          <object class="AdwPreferencesGroup">
+                            <property name="title" translatable="yes">Network Layer</property>
+
+                            <child>
+                              <object class="AdwComboRow" id="network_protocol_comborow">
+                                <property name="title" translatable="yes">Protocol</property>
+                              </object>
+                            </child>
+
+                          </object>
+                        </child>
+
+                        <child>
+                          <object class="GtkStack" id="network_protocols_stack"/>
+                        </child>
+
+                        <!-- Transport Layer -->
+                        <child>
+                          <object class="AdwPreferencesGroup">
+                            <property name="title" translatable="yes">Transport Layer</property>
+
+                            <child>
+                              <object class="AdwComboRow" id="transport_protocol_comborow">
+                                <property name="title" translatable="yes">Protocol</property>
+                              </object>
+                            </child>
+
+                          </object>
+                        </child>
+
+                        <child>
+                          <object class="GtkStack" id="transport_protocols_stack"/>
+                        </child>
+
+                      </object>
+                    </child>
+
                   </object>
                 </child>
 
               </object>
-            </child>
-
-            <child>
-              <object class="GtkStack" id="data_link_protocols_stack"/>
-            </child>
-
-            <!-- Network Layer -->
-            <child>
-              <object class="AdwPreferencesGroup">
-                <property name="title" translatable="yes">Network Layer</property>
-
-                <child>
-                  <object class="AdwComboRow" id="network_protocol_row">
-                    <property name="title" translatable="yes">Protocol</property>
-                  </object>
-                </child>
-
-              </object>
-            </child>
-
-            <child>
-              <object class="GtkStack" id="network_protocols_stack"/>
-            </child>
-
-            <!-- Transport Layer -->
-            <child>
-              <object class="AdwPreferencesGroup">
-                <property name="title" translatable="yes">Transport Layer</property>
-
-                <child>
-                  <object class="AdwComboRow" id="transport_protocol_row">
-                    <property name="title" translatable="yes">Protocol</property>
-                  </object>
-                </child>
-
-              </object>
-            </child>
-
-            <child>
-              <object class="GtkStack" id="transport_protocols_stack"/>
-            </child>
+            </property>
 
           </object>
         </child>
@@ -82,5 +121,4 @@
 
   </template>
 </interface>
-
 

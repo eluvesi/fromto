@@ -6,177 +6,214 @@
   <template class="PreviewPage" parent="GtkBox">
     <property name="orientation">vertical</property>
 
-    <!-- AdwClamp used to constrain the width of child widgets -->
     <child>
-      <object class="AdwClamp">
-        <property name="maximum-size">650</property>
-        <property name="tightening-threshold">650</property>
-        <property name="margin-start">12</property>
-        <property name="margin-end">12</property>
-        <property name="margin-bottom">12</property>
+      <object class="GtkStack" id="preview_stack">
+        <property name="transition-type">crossfade</property>
 
-        <!-- Vertical GtkBox of three textview -->
+        <!-- Placeholder: when no packet selected -->
         <child>
-          <object class="GtkBox">
-            <property name="orientation">vertical</property>
-            <property name="vexpand">true</property>
-            <property name="spacing">24</property>
+          <object class="GtkStackPage">
+            <property name="name">empty</property>
 
-            <!-- Packet Summary textview (Scapy: packet.summary()) -->
-            <child>
-              <object class="GtkBox">
-                <property name="orientation">vertical</property>
-                <property name="spacing">12</property>
+            <property name="child">
+              <object class="AdwStatusPage">
+                <property name="title" translatable="yes">Packet Content Preview</property>
+                <property name="description" translatable="yes">Select a packet to view its contents</property>
+                <property name="icon-name">view-reveal-symbolic</property>
+              </object>
+            </property>
 
+          </object>
+        </child>
+
+        <!-- Preview Page content: when packet selected -->
+        <child>
+          <object class="GtkStackPage">
+            <property name="name">content</property>
+
+            <property name="child">
+              <object class="GtkScrolledWindow">
+
+                <!-- AdwClamp used to constrain the width of child widgets -->
                 <child>
-                  <object class="GtkBox">
+                  <object class="AdwClamp">
+                    <property name="maximum-size">650</property>
+                    <property name="tightening-threshold">650</property>
+                    <property name="margin-start">12</property>
+                    <property name="margin-end">12</property>
+                    <property name="margin-bottom">12</property>
 
+                    <!-- Vertical GtkBox of three textview -->
                     <child>
-                      <object class="GtkLabel">
-                        <property name="label">Summary</property>
-                        <property name="halign">start</property>
-                        <property name="hexpand">true</property>
-                        <style>
-                          <class name="heading"/>
-                        </style>
+                      <object class="GtkBox">
+                        <property name="orientation">vertical</property>
+                        <property name="vexpand">true</property>
+                        <property name="spacing">24</property>
+
+                        <!-- Packet Summary textview (Scapy: packet.summary()) -->
+                        <child>
+                          <object class="GtkBox">
+                            <property name="orientation">vertical</property>
+                            <property name="spacing">12</property>
+
+                            <child>
+                              <object class="GtkBox">
+
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="label">Summary</property>
+                                    <property name="halign">start</property>
+                                    <property name="hexpand">true</property>
+                                    <style>
+                                      <class name="heading"/>
+                                    </style>
+                                  </object>
+                                </child>
+
+                                <child>
+                                  <object class="GtkButton" id="summary_copy_button">
+                                    <property name="icon-name">edit-copy-symbolic</property>
+                                    <property name="tooltip-text">Copy Summary</property>
+                                    <style>
+                                      <class name="flat"/>
+                                    </style>
+                                  </object>
+                                </child>
+
+                              </object>
+                            </child>
+
+                            <child>
+                              <object class="GtkTextView" id="summary_textview">
+                                <property name="editable">false</property>
+                                <property name="cursor-visible">false</property>
+                                <property name="monospace">true</property>
+                                <property name="left-margin">12</property>
+                                <property name="right-margin">12</property>
+                                <property name="top-margin">12</property>
+                                <property name="bottom-margin">12</property>
+                                <property name="vscroll-policy">natural</property>
+                                <style>
+                                  <class name="card"/>
+                                </style>
+                              </object>
+                            </child>
+
+                          </object>
+                        </child>
+
+                        <!-- Packet Hex Dump textview (Scapy: packet.show2()) -->
+                        <child>
+                          <object class="GtkBox">
+                            <property name="orientation">vertical</property>
+                            <property name="spacing">12</property>
+
+                            <child>
+                              <object class="GtkBox">
+
+                                <child type="start">
+                                  <object class="GtkLabel">
+                                    <property name="label">Hex Dump</property>
+                                    <property name="halign">start</property>
+                                    <property name="hexpand">true</property>
+                                    <style>
+                                      <class name="heading"/>
+                                    </style>
+                                  </object>
+                                </child>
+
+                                <child type="end">
+                                  <object class="GtkButton" id="hexdump_copy_button">
+                                    <property name="icon-name">edit-copy-symbolic</property>
+                                    <property name="tooltip-text">Copy Hex Dump</property>
+                                    <style>
+                                      <class name="flat"/>
+                                    </style>
+                                  </object>
+                                </child>
+
+                              </object>
+                            </child>
+
+                            <child>
+                              <object class="GtkTextView" id="hexdump_textview">
+                                <property name="editable">false</property>
+                                <property name="cursor-visible">false</property>
+                                <property name="monospace">true</property>
+                                <property name="left-margin">12</property>
+                                <property name="right-margin">12</property>
+                                <property name="top-margin">12</property>
+                                <property name="bottom-margin">12</property>
+                                <property name="vscroll-policy">natural</property>
+                                <style>
+                                  <class name="card"/>
+                                </style>
+                              </object>
+                            </child>
+
+                          </object>
+                        </child>
+
+                        <!-- Packet Details textview (Scapy: packet.show2()) -->
+                        <child>
+                          <object class="GtkBox">
+                            <property name="orientation">vertical</property>
+                            <property name="spacing">12</property>
+
+                            <child>
+                              <object class="GtkBox">
+
+                                <child type="start">
+                                  <object class="GtkLabel">
+                                    <property name="label">Details</property>
+                                    <property name="halign">start</property>
+                                    <property name="hexpand">true</property>
+                                    <style>
+                                      <class name="heading"/>
+                                    </style>
+                                  </object>
+                                </child>
+
+                                <child type="end">
+                                  <object class="GtkButton" id="details_copy_button">
+                                    <property name="icon-name">edit-copy-symbolic</property>
+                                    <property name="tooltip-text">Copy Details</property>
+                                    <style>
+                                      <class name="flat"/>
+                                    </style>
+                                  </object>
+                                </child>
+
+                              </object>
+                            </child>
+
+                            <child>
+                              <object class="GtkTextView" id="details_textview">
+                                <property name="editable">false</property>
+                                <property name="cursor-visible">false</property>
+                                <property name="monospace">true</property>
+                                <property name="left-margin">12</property>
+                                <property name="right-margin">12</property>
+                                <property name="top-margin">12</property>
+                                <property name="bottom-margin">12</property>
+                                <property name="vscroll-policy">natural</property>
+                                <style>
+                                  <class name="card"/>
+                                </style>
+                              </object>
+                            </child>
+
+                          </object>
+                        </child>
+
                       </object>
                     </child>
 
-                    <child>
-                      <object class="GtkButton" id="copy_summary_button">
-                        <property name="icon-name">edit-copy-symbolic</property>
-                        <property name="tooltip-text">Copy Summary</property>
-                        <style>
-                          <class name="flat"/>
-                        </style>
-                      </object>
-                    </child>
-
-                  </object>
-                </child>
-
-                <child>
-                  <object class="GtkTextView" id="summary_textview">
-                    <property name="editable">false</property>
-                    <property name="cursor-visible">false</property>
-                    <property name="monospace">true</property>
-                    <property name="left-margin">12</property>
-                    <property name="right-margin">12</property>
-                    <property name="top-margin">12</property>
-                    <property name="bottom-margin">12</property>
-                    <property name="vscroll-policy">natural</property>
-                    <style>
-                      <class name="card"/>
-                    </style>
                   </object>
                 </child>
 
               </object>
-            </child>
-
-            <!-- Packet Details textview (Scapy: packet.show2()) -->
-            <child>
-              <object class="GtkBox">
-                <property name="orientation">vertical</property>
-                <property name="spacing">12</property>
-
-                <child>
-                  <object class="GtkBox">
-
-                    <child type="start">
-                      <object class="GtkLabel">
-                        <property name="label">Details</property>
-                        <property name="halign">start</property>
-                        <property name="hexpand">true</property>
-                        <style>
-                          <class name="heading"/>
-                        </style>
-                      </object>
-                    </child>
-
-                    <child type="end">
-                      <object class="GtkButton" id="copy_details_button">
-                        <property name="icon-name">edit-copy-symbolic</property>
-                        <property name="tooltip-text">Copy Details</property>
-                        <style>
-                          <class name="flat"/>
-                        </style>
-                      </object>
-                    </child>
-
-                  </object>
-                </child>
-
-                <child>
-                  <object class="GtkTextView" id="details_textview">
-                    <property name="editable">false</property>
-                    <property name="cursor-visible">false</property>
-                    <property name="monospace">true</property>
-                    <property name="left-margin">12</property>
-                    <property name="right-margin">12</property>
-                    <property name="top-margin">12</property>
-                    <property name="bottom-margin">12</property>
-                    <property name="vscroll-policy">natural</property>
-                    <style>
-                      <class name="card"/>
-                    </style>
-                  </object>
-                </child>
-
-              </object>
-            </child>
-
-            <!-- Packet Hex Dump textview (Scapy: packet.show2()) -->
-            <child>
-              <object class="GtkBox">
-                <property name="orientation">vertical</property>
-                <property name="spacing">12</property>
-
-                <child>
-                  <object class="GtkBox">
-
-                    <child type="start">
-                      <object class="GtkLabel">
-                        <property name="label">Hex Dump</property>
-                        <property name="halign">start</property>
-                        <property name="hexpand">true</property>
-                        <style>
-                          <class name="heading"/>
-                        </style>
-                      </object>
-                    </child>
-
-                    <child type="end">
-                      <object class="GtkButton" id="copy_hexdump_button">
-                        <property name="icon-name">edit-copy-symbolic</property>
-                        <property name="tooltip-text">Copy Hex Dump</property>
-                        <style>
-                          <class name="flat"/>
-                        </style>
-                      </object>
-                    </child>
-
-                  </object>
-                </child>
-
-                <child>
-                  <object class="GtkTextView" id="hexdump_textview">
-                    <property name="editable">false</property>
-                    <property name="cursor-visible">false</property>
-                    <property name="monospace">true</property>
-                    <property name="left-margin">12</property>
-                    <property name="right-margin">12</property>
-                    <property name="top-margin">12</property>
-                    <property name="bottom-margin">12</property>
-                    <property name="vscroll-policy">natural</property>
-                    <style>
-                      <class name="card"/>
-                    </style>
-                  </object>
-                </child>
-
-              </object>
-            </child>
+            </property>
 
           </object>
         </child>

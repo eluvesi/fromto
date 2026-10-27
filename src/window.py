@@ -18,7 +18,7 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from gi.repository import Adw, Gtk
-from scapy.all import get_if_list, sendp
+from scapy.all import conf, get_if_list, send, sendp
 
 from .packet_list import PacketList
 from .packet_workspace import PacketWorkspace
@@ -45,11 +45,18 @@ class FromtoWindow(Adw.ApplicationWindow):
             'send-packet', self._on_send_packet
         )
         self.packet_workspace.connect(
+            'apply-packet', self._on_apply_packet,
+        )
+        self.packet_workspace.connect(
             'toast-requested', self._on_toast_requested
         )
-
-        # Sending remains disabled until it is implemented.
-        self.send_button.set_sensitive(False)
+        self.send_button.connect(
+            'clicked', self._on_send_all_packets
+        )
+        self.interface_dropdown.connect(
+            'notify::selected',
+            self._on_interface_changed,
+        )
 
         self._populate_interfaces()
 
@@ -70,21 +77,53 @@ class FromtoWindow(Adw.ApplicationWindow):
 
     def _on_send_packet(self, _packet_list, packet):
         """Send one packet using the selected network interface."""
-        selected_item = self.interface_dropdown.get_selected_item()
-
-        if selected_item is None:
+        selected = self.interface_dropdown.get_selected_item()
+        if selected is None:
             self.show_toast(_('No Network Interface Selected'))
             return
 
-        interface = selected_item.get_string()
-
         try:
-            sendp(packet, iface=interface, count=1, verbose=False)
+            sendp(
+                packet,
+                iface=selected.get_string(),
+                count=1,
+                verbose=False
+            )
         except Exception:
             self.show_toast(_('Packet Sending Failed'))
             return
 
         self.show_toast(_('Packet Sent'))
+
+    def _on_send_all_packets(self, _button):
+        """Send all packets using the selected network interface."""
+        selected = self.interface_dropdown.get_selected_item()
+        if selected is None:
+            self.show_toast(_('No Network Interface Selected'))
+            return
+
+        try:
+            sendp(
+                self.packet_list.packets,
+                iface=selected.get_string(),
+                inter=self.delay_spinbutton.get_value() / 1000,
+                verbose=False,
+            )
+        except Exception:
+            self.show_toast(_('Packets Sending Failed'))
+            return
+
+        self.show_toast(_('Packets Sent'))
+
+    def _on_interface_changed(self, dropdown, _pspec):
+        """Passes the selected interface to the packet list."""
+        item = dropdown.get_selected_item()
+        if item:
+            conf.iface = item.get_string()
+
+    def _on_apply_packet(self, _workspace, original_packet, new_packet):
+        """Apply changes from workspace by replacing a packet in the list."""
+        return self.packet_list.replace_packet(original_packet, new_packet)
 
     def _on_toast_requested(self, _source, message):
         """Display a toast requested by the packet workspace."""

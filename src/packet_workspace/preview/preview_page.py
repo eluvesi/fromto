@@ -20,7 +20,6 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from gi.repository import Adw, Gdk, GObject, Gtk
-
 from scapy.all import hexdump
 
 
@@ -41,38 +40,39 @@ class PreviewPage(Gtk.Box):
         ),
     }
 
-    summary_textview = Gtk.Template.Child()
-    details_textview = Gtk.Template.Child()
-    hexdump_textview = Gtk.Template.Child()
+    preview_stack = Gtk.Template.Child()
 
-    copy_summary_button = Gtk.Template.Child()
-    copy_details_button = Gtk.Template.Child()
-    copy_hexdump_button = Gtk.Template.Child()
+    summary_textview = Gtk.Template.Child()
+    summary_copy_button = Gtk.Template.Child()
+
+    hexdump_textview = Gtk.Template.Child()
+    hexdump_copy_button = Gtk.Template.Child()
+
+    details_textview = Gtk.Template.Child()
+    details_copy_button = Gtk.Template.Child()
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self._packet = None
 
-        self.copy_summary_button.connect(
+        self.summary_copy_button.connect(
             'clicked',
             self._on_copy_clicked,
             self.summary_textview,
             _('Summary Copied'),
         )
-        self.copy_details_button.connect(
-            'clicked',
-            self._on_copy_clicked,
-            self.details_textview,
-            _('Details Copied'),
-        )
-        self.copy_hexdump_button.connect(
+        self.hexdump_copy_button.connect(
             'clicked',
             self._on_copy_clicked,
             self.hexdump_textview,
             _('Hex Dump Copied'),
         )
-
-        self._show_empty_state()
+        self.details_copy_button.connect(
+            'clicked',
+            self._on_copy_clicked,
+            self.details_textview,
+            _('Details Copied'),
+        )
 
     @property
     def packet(self):
@@ -87,14 +87,16 @@ class PreviewPage(Gtk.Box):
     def refresh(self):
         """Refresh all previews after the packet has been modified."""
         if self._packet is None:
-            self._show_empty_state()
+            self.preview_stack.set_visible_child_name('empty')
             return
+
+        self.preview_stack.set_visible_child_name('content')
 
         try:
             previews = (
                 (self.summary_textview, self._packet.summary()),
-                (self.details_textview, self._packet.show2(dump=True)),
                 (self.hexdump_textview, hexdump(self._packet, dump=True)),
+                (self.details_textview, self._packet.show2(dump=True)),
             )
         except Exception as error:
             message = _('Unable to generate packet preview') + f':\n{error}'
@@ -104,15 +106,11 @@ class PreviewPage(Gtk.Box):
         for textview, text in previews:
             self._set_text(textview, text or _('(No data)'))
 
-    def _show_empty_state(self):
-        """Display a placeholder when no packet is selected."""
-        self._set_all_text(_('Select a packet to preview its contents.'))
-
     def _set_all_text(self, text):
         """Set the same text in all preview fields."""
         self._set_text(self.summary_textview, text)
-        self._set_text(self.details_textview, text)
         self._set_text(self.hexdump_textview, text)
+        self._set_text(self.details_textview, text)
 
     def _on_copy_clicked(self, _button, textview, message):
         """Copy the contents of a text view to the clipboard."""

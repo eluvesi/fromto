@@ -14,14 +14,13 @@
             <property name="upper">65535</property>
             <property name="step-increment">1</property>
             <property name="page-increment">1024</property>
-            <property name="value">53</property>
           </object>
         </property>
 
         <child type="suffix">
-          <object class="GtkButton" id="sport_restore_button">
+          <object class="GtkButton" id="sport_reset_button">
             <property name="icon-name">view-refresh-symbolic</property>
-            <property name="tooltip-text" translatable="yes">Restore Default</property>
+            <property name="tooltip-text" translatable="yes">Reset Source Port</property>
             <property name="valign">center</property>
             <style>
               <class name="flat"/>
@@ -41,14 +40,13 @@
             <property name="upper">65535</property>
             <property name="step-increment">1</property>
             <property name="page-increment">1024</property>
-            <property name="value">53</property>
           </object>
         </property>
 
         <child type="suffix">
-          <object class="GtkButton" id="dport_restore_button">
+          <object class="GtkButton" id="dport_reset_button">
             <property name="icon-name">view-refresh-symbolic</property>
-            <property name="tooltip-text" translatable="yes">Restore Default</property>
+            <property name="tooltip-text" translatable="yes">Reset Destination Port</property>
             <property name="valign">center</property>
             <style>
               <class name="flat"/>
@@ -68,14 +66,13 @@
             <property name="upper">65535</property>
             <property name="step-increment">1</property>
             <property name="page-increment">1024</property>
-            <property name="value">0</property>
           </object>
         </property>
 
         <child type="suffix">
-          <object class="GtkButton" id="len_restore_button">
+          <object class="GtkButton" id="len_auto_button">
             <property name="icon-name">view-refresh-symbolic</property>
-            <property name="tooltip-text" translatable="yes">Restore Default</property>
+            <property name="tooltip-text" translatable="yes">Calculate Total Length</property>
             <property name="valign">center</property>
             <style>
               <class name="flat"/>
@@ -100,9 +97,9 @@
         </property>
 
         <child type="suffix">
-          <object class="GtkButton" id="chksum_restore_button">
+          <object class="GtkButton" id="chksum_auto_button">
             <property name="icon-name">view-refresh-symbolic</property>
-            <property name="tooltip-text" translatable="yes">Restore Default</property>
+            <property name="tooltip-text" translatable="yes">Calculate Header Checksum</property>
             <property name="valign">center</property>
             <style>
               <class name="flat"/>

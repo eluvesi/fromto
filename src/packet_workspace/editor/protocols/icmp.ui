@@ -44,14 +44,13 @@
             <property name="upper">255</property>
             <property name="step-increment">1</property>
             <property name="page-increment">16</property>
-            <property name="value">0</property>
           </object>
         </property>
 
         <child type="suffix">
-          <object class="GtkButton" id="code_restore_button">
+          <object class="GtkButton" id="code_reset_button">
             <property name="icon-name">view-refresh-symbolic</property>
-            <property name="tooltip-text" translatable="yes">Restore Default</property>
+            <property name="tooltip-text" translatable="yes">Reset Code</property>
             <property name="valign">center</property>
             <style>
               <class name="flat"/>
@@ -64,21 +63,20 @@
 
     <child>
       <object class="AdwSpinRow" id="chksum_spinrow">
-        <property name="title" translatable="yes">Header Checksumh</property>
+        <property name="title" translatable="yes">Header Checksum</property>
         <property name="adjustment">
           <object class="GtkAdjustment">
             <property name="lower">0</property>
             <property name="upper">65535</property>
             <property name="step-increment">1</property>
             <property name="page-increment">1024</property>
-            <property name="value">0</property>
           </object>
         </property>
 
         <child type="suffix">
-          <object class="GtkButton" id="chksum_restore_button">
+          <object class="GtkButton" id="chksum_auto_button">
             <property name="icon-name">view-refresh-symbolic</property>
-            <property name="tooltip-text" translatable="yes">Restore Default</property>
+            <property name="tooltip-text" translatable="yes">Calculate Header Checksum</property>
             <property name="valign">center</property>
             <style>
               <class name="flat"/>
@@ -98,14 +96,13 @@
             <property name="upper">65535</property>
             <property name="step-increment">1</property>
             <property name="page-increment">1024</property>
-            <property name="value">0</property>
           </object>
         </property>
 
         <child type="suffix">
-          <object class="GtkButton" id="id_restore_button">
+          <object class="GtkButton" id="id_reset_button">
             <property name="icon-name">view-refresh-symbolic</property>
-            <property name="tooltip-text" translatable="yes">Restore Default</property>
+            <property name="tooltip-text" translatable="yes">Reset Identification</property>
             <property name="valign">center</property>
             <style>
               <class name="flat"/>
@@ -125,14 +122,13 @@
             <property name="upper">65535</property>
             <property name="step-increment">1</property>
             <property name="page-increment">1024</property>
-            <property name="value">0</property>
           </object>
         </property>
 
         <child type="suffix">
-          <object class="GtkButton" id="seq_restore_button">
+          <object class="GtkButton" id="seq_reset_button">
             <property name="icon-name">view-refresh-symbolic</property>
-            <property name="tooltip-text" translatable="yes">Restore Default</property>
+            <property name="tooltip-text" translatable="yes">Reset Sequence Number</property>
             <property name="valign">center</property>
             <style>
               <class name="flat"/>

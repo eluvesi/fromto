@@ -39,34 +39,97 @@ class PacketWorkspace(Gtk.Box):
             None,
             (str,),
         ),
+        'apply-packet': (
+            GObject.SignalFlags.RUN_LAST,
+            GObject.TYPE_BOOLEAN,
+            (GObject.TYPE_PYOBJECT, GObject.TYPE_PYOBJECT),
+        ),
     }
 
     editor_page = Gtk.Template.Child()
     preview_page = Gtk.Template.Child()
+    apply_button = Gtk.Template.Child()
+    cancel_button = Gtk.Template.Child()
+    changes_revealer = Gtk.Template.Child()
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self._packet = None
+        self._original_packet = None
+        self._working_packet = None
+        self._has_changes = False
 
+        self.apply_button.connect(
+            'clicked', self._on_apply
+        )
+        self.cancel_button.connect(
+            'clicked', self._on_cancel
+        )
+        self.editor_page.connect(
+            'packet-changed', self._on_packet_changed
+        )
+        self.editor_page.connect(
+            'toast-requested', self._on_toast_requested
+        )
         self.preview_page.connect(
             'toast-requested', self._on_toast_requested
         )
 
     @property
     def packet(self):
-        """The packet currently displayed by the workspace."""
-        return self._packet
+        """Return the packet being edited."""
+        return self._working_packet
 
     def set_packet(self, packet):
-        """Set the packet displayed by the workspace."""
-        self._packet = packet
-        # EditPage will be added here when its widget is implemented.
-        self.preview_page.set_packet(packet)
+        """Load a packet and create a working copy."""
+        self._original_packet = packet
+        self._working_packet = packet.copy() if packet is not None else None
+        self._has_changes = False
 
-    def refresh(self):
-        """Refresh page representations after the packet has changed."""
-        # EditPage will be added here when its widget is implemented.
+        self.editor_page.set_packet(self._working_packet)
+        self.preview_page.set_packet(self._working_packet)
+
+        self._update_actions()
+
+    def _on_packet_changed(self, _editor):
+        """Handle edits made in EditorPage."""
+        if self._working_packet is None:
+            return
+
+        self._has_changes = True
         self.preview_page.refresh()
+        self._update_actions()
+
+    def _on_apply(self, _button):
+        """Commit changes to PacketList."""
+        if self._working_packet is None or not self._has_changes:
+            return
+
+        if not self.emit(
+            'apply-packet', self._original_packet, self._working_packet
+        ):
+            self.emit(
+                'toast-requested',
+                _('Could not apply changes: packet no longer exists.'),
+            )
+            return
+
+        # Start a new editing session using a fresh working copy
+        self.set_packet(self._working_packet)
+
+    def _on_cancel(self, _button):
+        """Discard changes and restore the original packet."""
+        if self._original_packet is None:
+            return
+
+        # Start a new editing session using an original packet
+        self.set_packet(self._original_packet)
+
+    def _update_actions(self):
+        """Update the visibility and sensitivity of action buttons."""
+        visible = self._working_packet is not None and self._has_changes
+        self.changes_revealer.set_reveal_child(visible)
+        self.apply_button.set_sensitive(visible)
+        self.cancel_button.set_sensitive(visible)
 
     def _on_toast_requested(self, _source, message):
         """Forward toast requests from workspace pages."""

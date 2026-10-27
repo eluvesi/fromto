@@ -9,12 +9,11 @@
       <object class="AdwEntryRow" id="src_entryrow">
         <property name="title" translatable="yes">Source MAC Address</property>
         <property name="max-length">17</property>
-        <property name="text">00:00:00:00:00:00</property>
 
         <child type="suffix">
           <object class="GtkButton" id="src_auto_button">
             <property name="icon-name">view-refresh-symbolic</property>
-            <property name="tooltip-text" translatable="yes">Restore Default</property>
+            <property name="tooltip-text" translatable="yes">Autofill Source MAC</property>
             <property name="valign">center</property>
             <style>
               <class name="flat"/>
@@ -29,12 +28,11 @@
       <object class="AdwEntryRow" id="dst_entryrow">
         <property name="title" translatable="yes">Destination MAC Address</property>
         <property name="max-length">17</property>
-        <property name="text">00:00:00:00:00:00</property>
 
         <child type="suffix">
           <object class="GtkButton" id="dst_auto_button">
             <property name="icon-name">view-refresh-symbolic</property>
-            <property name="tooltip-text" translatable="yes">Restore Default</property>
+            <property name="tooltip-text" translatable="yes">Autofill Destination MAC</property>
             <property name="valign">center</property>
             <style>
               <class name="flat"/>
@@ -54,14 +52,13 @@
             <property name="upper">65535</property>
             <property name="step-increment">1</property>
             <property name="page-increment">1024</property>
-            <property name="value">2048</property>
           </object>
         </property>
 
         <child type="suffix">
-          <object class="GtkButton" id="type_restore_button">
+          <object class="GtkButton" id="type_auto_button">
             <property name="icon-name">view-refresh-symbolic</property>
-            <property name="tooltip-text" translatable="yes">Restore Default</property>
+            <property name="tooltip-text" translatable="yes">Autofill EtherType</property>
             <property name="valign">center</property>
             <style>
               <class name="flat"/>
@@ -76,3 +73,4 @@
 
 </interface>
   
+

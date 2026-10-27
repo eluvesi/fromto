@@ -20,8 +20,10 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from gi.repository import Adw, GObject, Gtk
-from scapy.all import Ether, ICMP, IP, TCP, UDP
-from itertools import count
+from scapy.all import (
+    Ether, ICMP, IP, TCP, UDP,
+    conf, get_if_addr, get_if_hwaddr
+)
 
 from .packet_row import PacketRow
 
@@ -51,27 +53,32 @@ class PacketList(Gtk.Box):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-
         self._rows = []
 
         self.add_packet_buttonrow.connect('activated', self._on_add_packet)
         self.packet_listbox.connect('row-selected', self._on_row_selected)
 
-        # Temporary solution for creating different packets.
-        self._packet_counter = count(0)
 
     @property
     def packets(self):
         """Return the packets in queue order."""
         return [row.packet for row in self._rows]
 
+    def replace_packet(self, original_packet, new_packet):
+        """Replace a packet without changing its position."""
+        for row in self._rows:
+            if row.packet is original_packet:
+                row.set_packet(new_packet)
+                return True
+
+        return False
+
     def _create_default_packet(self):
         """Create a temporary packet until the editor is implemented."""
-        number = next(self._packet_counter) % 4 + 1
         return (
-            Ether()
-            / IP(src=f'127.0.0.1', dst=f'127.0.0.1')
-            / ICMP()
+            Ether(src=get_if_hwaddr(conf.iface))
+            / IP(src=get_if_addr(conf.iface), dst='8.8.8.8')
+            / ICMP(type='echo-request')
         )
 
     def _on_add_packet(self, *_args):

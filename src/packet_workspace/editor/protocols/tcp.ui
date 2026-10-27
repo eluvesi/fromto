@@ -14,14 +14,13 @@
             <property name="upper">65535</property>
             <property name="step-increment">1</property>
             <property name="page-increment">1024</property>
-            <property name="value">20</property>
           </object>
         </property>
 
         <child type="suffix">
-          <object class="GtkButton" id="sport_restore_button">
+          <object class="GtkButton" id="sport_reset_button">
             <property name="icon-name">view-refresh-symbolic</property>
-            <property name="tooltip-text" translatable="yes">Restore Default</property>
+            <property name="tooltip-text" translatable="yes">Reset Source Port</property>
             <property name="valign">center</property>
             <style>
               <class name="flat"/>
@@ -41,14 +40,13 @@
             <property name="upper">65535</property>
             <property name="step-increment">1</property>
             <property name="page-increment">1024</property>
-            <property name="value">80</property>
           </object>
         </property>
 
         <child type="suffix">
-          <object class="GtkButton" id="dport_restore_button">
+          <object class="GtkButton" id="dport_reset_button">
             <property name="icon-name">view-refresh-symbolic</property>
-            <property name="tooltip-text" translatable="yes">Restore Default</property>
+            <property name="tooltip-text" translatable="yes">Reset Destination Port</property>
             <property name="valign">center</property>
             <style>
               <class name="flat"/>
@@ -68,14 +66,13 @@
             <property name="upper">4294967295</property>
             <property name="step-increment">1</property>
             <property name="page-increment">65536</property>
-            <property name="value">0</property>
           </object>
         </property>
 
         <child type="suffix">
-          <object class="GtkButton" id="seq_restore_button">
+          <object class="GtkButton" id="seq_reset_button">
             <property name="icon-name">view-refresh-symbolic</property>
-            <property name="tooltip-text" translatable="yes">Restore Default</property>
+            <property name="tooltip-text" translatable="yes">Reset Sequence Number</property>
             <property name="valign">center</property>
             <style>
               <class name="flat"/>
@@ -95,14 +92,13 @@
             <property name="upper">4294967295</property>
             <property name="step-increment">1</property>
             <property name="page-increment">65536</property>
-            <property name="value">0</property>
           </object>
         </property>
 
         <child type="suffix">
-          <object class="GtkButton" id="ack_restore_button">
+          <object class="GtkButton" id="ack_reset_button">
             <property name="icon-name">view-refresh-symbolic</property>
-            <property name="tooltip-text" translatable="yes">Restore Default</property>
+            <property name="tooltip-text" translatable="yes">Reset Acknowledgment Number</property>
             <property name="valign">center</property>
             <style>
               <class name="flat"/>
@@ -122,14 +118,13 @@
             <property name="upper">15</property>
             <property name="step-increment">1</property>
             <property name="page-increment">1</property>
-            <property name="value">0</property>
           </object>
         </property>
 
         <child type="suffix">
-          <object class="GtkButton" id="dataofs_restore_button">
+          <object class="GtkButton" id="dataofs_auto_button">
             <property name="icon-name">view-refresh-symbolic</property>
-            <property name="tooltip-text" translatable="yes">Restore Default</property>
+            <property name="tooltip-text" translatable="yes">Calculate Data Offset</property>
             <property name="valign">center</property>
             <style>
               <class name="flat"/>
@@ -152,8 +147,8 @@
             </style>
 
             <child>
-              <object class="GtkToggleButton" id="reserved_0_button">
-                <property name="label" translatable="no">[R0]</property>
+              <object class="GtkToggleButton" id="reserved_2_button">
+                <property name="label" translatable="no">[R2]</property>
                 <property name="tooltip-text" translatable="yes">Reserved</property>
               </object>
             </child>
@@ -166,8 +161,8 @@
             </child>
 
             <child>
-              <object class="GtkToggleButton" id="reserved_2_button">
-                <property name="label" translatable="no">[R2]</property>
+              <object class="GtkToggleButton" id="reserved_0_button">
+                <property name="label" translatable="no">[R0]</property>
                 <property name="tooltip-text" translatable="yes">Reserved</property>
               </object>
             </child>
@@ -190,63 +185,63 @@
             </style>
 
             <child>
-              <object class="GtkToggleButton" id="flags_ns_button">
+              <object class="GtkToggleButton" id="flag_ns_button">
                 <property name="label" translatable="no">NS</property>
                 <property name="tooltip-text" translatable="yes">Nonce Sum</property>
               </object>
             </child>
 
             <child>
-              <object class="GtkToggleButton" id="flags_cwr_button">
+              <object class="GtkToggleButton" id="flag_cwr_button">
                 <property name="label" translatable="no">CWR</property>
                 <property name="tooltip-text" translatable="yes">Congestion Window Reduced</property>
               </object>
             </child>
 
             <child>
-              <object class="GtkToggleButton" id="flags_ece_button">
+              <object class="GtkToggleButton" id="flag_ece_button">
                 <property name="label" translatable="no">ECE</property>
                 <property name="tooltip-text" translatable="yes">ECN-Echo</property>
               </object>
             </child>
 
             <child>
-              <object class="GtkToggleButton" id="flags_urg_button">
+              <object class="GtkToggleButton" id="flag_urg_button">
                 <property name="label" translatable="no">URG</property>
                 <property name="tooltip-text" translatable="yes">Urgent</property>
               </object>
             </child>
 
             <child>
-              <object class="GtkToggleButton" id="flags_ack_button">
+              <object class="GtkToggleButton" id="flag_ack_button">
                 <property name="label" translatable="no">ACK</property>
                 <property name="tooltip-text" translatable="yes">Acknowledgment</property>
               </object>
             </child>
 
             <child>
-              <object class="GtkToggleButton" id="flags_psh_button">
+              <object class="GtkToggleButton" id="flag_psh_button">
                 <property name="label" translatable="no">PSH</property>
                 <property name="tooltip-text" translatable="yes">Push</property>
               </object>
             </child>
 
             <child>
-              <object class="GtkToggleButton" id="flags_rst_button">
+              <object class="GtkToggleButton" id="flag_rst_button">
                 <property name="label" translatable="no">RST</property>
                 <property name="tooltip-text" translatable="yes">Reset</property>
               </object>
             </child>
 
             <child>
-              <object class="GtkToggleButton" id="flags_syn_button">
+              <object class="GtkToggleButton" id="flag_syn_button">
                 <property name="label" translatable="no">SYN</property>
                 <property name="tooltip-text" translatable="yes">Synchronize</property>
               </object>
             </child>
 
             <child>
-              <object class="GtkToggleButton" id="flags_fin_button">
+              <object class="GtkToggleButton" id="flag_fin_button">
                 <property name="label" translatable="no">FIN</property>
                 <property name="tooltip-text" translatable="yes">Finish</property>
               </object>
@@ -267,14 +262,13 @@
             <property name="upper">65535</property>
             <property name="step-increment">1</property>
             <property name="page-increment">1024</property>
-            <property name="value">8192</property>
           </object>
         </property>
 
         <child type="suffix">
-          <object class="GtkButton" id="window_restore_button">
+          <object class="GtkButton" id="window_reset_button">
             <property name="icon-name">view-refresh-symbolic</property>
-            <property name="tooltip-text" translatable="yes">Restore Default</property>
+            <property name="tooltip-text" translatable="yes">Reset Window Size</property>
             <property name="valign">center</property>
             <style>
               <class name="flat"/>
@@ -299,9 +293,9 @@
         </property>
 
         <child type="suffix">
-          <object class="GtkButton" id="chksum_restore_button">
+          <object class="GtkButton" id="chksum_auto_button">
             <property name="icon-name">view-refresh-symbolic</property>
-            <property name="tooltip-text" translatable="yes">Restore Default</property>
+            <property name="tooltip-text" translatable="yes">Calculate Header Checksum</property>
             <property name="valign">center</property>
             <style>
               <class name="flat"/>
@@ -326,9 +320,9 @@
         </property>
 
         <child type="suffix">
-          <object class="GtkButton" id="urgptr_restore_button">
+          <object class="GtkButton" id="urgptr_reset_button">
             <property name="icon-name">view-refresh-symbolic</property>
-            <property name="tooltip-text" translatable="yes">Restore Default</property>
+            <property name="tooltip-text" translatable="yes">Reset Urgent Pointer</property>
             <property name="valign">center</property>
             <style>
               <class name="flat"/>

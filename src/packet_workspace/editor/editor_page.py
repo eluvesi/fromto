@@ -20,6 +20,7 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from gi.repository import Adw, GObject, Gtk
+from scapy.all import Ether, ICMP, IP, TCP, UDP
 
 from .ethernet import EthernetSettingsGroup
 from .ipv4 import IPv4SettingsGroup
@@ -28,33 +29,47 @@ from .tcp import TCPSettingsGroup
 from .udp import UDPSettingsGroup
 
 
+# Unified registry of supported protocols.
+#
+# layer — the layer within the editor interface.
+# settings_group — a GTK widget containing protocol settings.
+# packet_class — the corresponding Scapy class.
+
 PROTOCOLS = {
-    'data_link': {
-        'Ethernet II': ('ethernet', EthernetSettingsGroup),
+    'Ethernet II': {
+        'layer': 'data_link',
+        'settings_group': EthernetSettingsGroup,
+        'packet_class': Ether,
     },
-    'network': {
-        'IPv4': ('ipv4', IPv4SettingsGroup),
+    'IPv4': {
+        'layer': 'network',
+        'settings_group': IPv4SettingsGroup,
+        'packet_class': IP,
     },
-    'transport': {
-        'ICMP': ('icmp', ICMPSettingsGroup),
-        'TCP': ('tcp', TCPSettingsGroup),
-        'UDP': ('udp', UDPSettingsGroup),
+    'ICMP': {
+        'layer': 'transport',
+        'settings_group': ICMPSettingsGroup,
+        'packet_class': ICMP,
+    },
+    'TCP': {
+        'layer': 'transport',
+        'settings_group': TCPSettingsGroup,
+        'packet_class': TCP,
+    },
+    'UDP': {
+        'layer': 'transport',
+        'settings_group': UDPSettingsGroup,
+        'packet_class': UDP,
     },
 }
 
-def setup_protocol_layer(combo_row, stack, protocols):
-    combo_row.set_model(Gtk.StringList.new(list(protocols)))
-
-    for protocol_id, settings_group in protocols.values():
-        stack.add_named(settings_group(), protocol_id)
-
-    combo_row.connect(
-        'notify::selected',
-        lambda row, _: stack.set_visible_child_name(
-            list(protocols.values())[row.get_selected()][0]
-        ),
-    )
-    combo_row.set_selected(0)
+def get_protocols_by_layer(layer):
+    """Return the protocols pertaining to the specified layer."""
+    return {
+        name: definition
+        for name, definition in PROTOCOLS.items()
+        if definition['layer'] == layer
+    }
 
 
 @Gtk.Template(
@@ -66,6 +81,11 @@ class EditorPage(Gtk.Box):
     __gtype_name__ = 'EditorPage'
 
     __gsignals__ = {
+        'packet-changed': (
+            GObject.SignalFlags.RUN_LAST,
+            None,
+            (),
+        ),
         'toast-requested': (
             GObject.SignalFlags.RUN_LAST,
             None,
@@ -73,32 +93,21 @@ class EditorPage(Gtk.Box):
         ),
     }
 
-    data_link_protocol_row = Gtk.Template.Child()
+    editor_stack = Gtk.Template.Child()
+
+    data_link_protocol_comborow = Gtk.Template.Child()
     data_link_protocols_stack = Gtk.Template.Child()
-    network_protocol_row = Gtk.Template.Child()
+
+    network_protocol_comborow = Gtk.Template.Child()
     network_protocols_stack = Gtk.Template.Child()
-    transport_protocol_row = Gtk.Template.Child()
+
+    transport_protocol_comborow = Gtk.Template.Child()
     transport_protocols_stack = Gtk.Template.Child()
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self._packet = None
-
-        setup_protocol_layer(
-            self.data_link_protocol_row,
-            self.data_link_protocols_stack,
-            PROTOCOLS["data_link"],
-        )
-        setup_protocol_layer(
-            self.network_protocol_row,
-            self.network_protocols_stack,
-            PROTOCOLS["network"],
-        )
-        setup_protocol_layer(
-            self.transport_protocol_row,
-            self.transport_protocols_stack,
-            PROTOCOLS["transport"],
-        )
+        self._setup_layers()
 
     @property
     def packet(self):
@@ -108,4 +117,106 @@ class EditorPage(Gtk.Box):
     def set_packet(self, packet):
         """Set the packet to preview and update all views."""
         self._packet = packet
+
+        for group in self._settings_groups.values():
+            group.set_packet(packet)
+
+        for layer, combo_row, stack in (
+            ('data_link', self.data_link_protocol_comborow,
+             self.data_link_protocols_stack),
+            ('network', self.network_protocol_comborow,
+             self.network_protocols_stack),
+            ('transport', self.transport_protocol_comborow,
+             self.transport_protocols_stack),
+        ):
+            protocols = get_protocols_by_layer(layer)
+
+            for index, (name, definition) in enumerate(protocols.items()):
+                if packet and packet.haslayer(definition['packet_class']):
+                    combo_row.set_selected(index)
+                    stack.set_visible_child_name(name)
+                    break
+
+        self.editor_stack.set_visible_child_name(
+            'content' if packet is not None else 'empty'
+        )
+
+    def _setup_layers(self):
+        """Configure protocols selectors and settings pages at all layers."""
+        self._settings_groups = {}
+
+        self._setup_layer(
+            self.data_link_protocol_comborow,
+            self.data_link_protocols_stack,
+            'data_link',
+        )
+        self._setup_layer(
+            self.network_protocol_comborow,
+            self.network_protocols_stack,
+            'network',
+        )
+        self._setup_layer(
+            self.transport_protocol_comborow,
+            self.transport_protocols_stack,
+            'transport',
+        )
+
+    def _setup_layer(self, combo_row, stack, layer):
+        """Set up protocols settings pages for one layer."""
+        protocols = get_protocols_by_layer(layer)
+        names = list(protocols)
+
+        combo_row.set_model(Gtk.StringList.new(names))
+
+        for name, definition in protocols.items():
+            group = definition['settings_group']()
+            group.connect('packet-changed', self._on_packet_changed)
+            group.connect('toast_requested', self._on_toast_requested)
+            stack.add_named(group, name)
+            self._settings_groups[name] = group
+
+        def on_selected(row, _pspec):
+            index = row.get_selected()
+            if index < len(names):
+                new_proto_name = names[index]
+                old_proto_name = stack.get_visible_child_name()
+                stack.set_visible_child_name(new_proto_name)
+                self._replace_protocol(old_proto_name, new_proto_name)
+
+        combo_row.connect('notify::selected', on_selected)
+
+    def _replace_protocol(self, old_proto_name, new_proto_name):
+        """Replace a packet layer while preserving the remaining layers."""
+        if self._packet is None:
+            return
+
+        old_class = PROTOCOLS[old_proto_name]['packet_class']
+        new_class = PROTOCOLS[new_proto_name]['packet_class']
+
+        old_layer = self._packet.getlayer(old_class)
+        if old_layer is None:
+            return
+
+        new_layer = new_class()
+        new_layer.payload = old_layer.payload
+        old_layer.payload = b''
+
+        if old_layer is self._packet:
+            self._packet = new_layer
+        else:
+            parent = self._packet
+            while parent.payload is not old_layer:
+                parent = parent.payload
+            parent.payload = new_layer
+
+        self.set_packet(self._packet)
+        self.emit('packet-changed')
+
+    def _on_packet_changed(self, _source):
+        """Reports that the package has been modified."""
+        self.emit('packet-changed')
+
+    def _on_toast_requested(self, _source, message):
+        """Forward toast requests from protocols settings groups."""
+        self.emit('toast-requested', message)
 

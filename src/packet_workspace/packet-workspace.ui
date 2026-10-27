@@ -32,12 +32,8 @@
                 <property name="title" translatable="yes">Editor</property>
                 <property name="icon-name">document-edit-symbolic</property>
 
-                 <property name="child">
-                   <object class="GtkScrolledWindow">
-                     <child>
-                       <object class="EditorPage" id="editor_page"/>
-                     </child>
-                  </object>
+                <property name="child">
+                  <object class="EditorPage" id="editor_page"/>
                 </property>
 
               </object>
@@ -51,11 +47,7 @@
                 <property name="icon-name">view-reveal-symbolic</property>
 
                 <property name="child">
-                  <object class="GtkScrolledWindow">
-                     <child>
-                       <object class="PreviewPage" id="preview_page"/>
-                     </child>
-                  </object>
+                  <object class="PreviewPage" id="preview_page"/>
                 </property>
 
               </object>
@@ -63,6 +55,56 @@
 
           </object>
         </property>
+
+        <!-- PacketWorkspace bottom panel -->
+        <child type="bottom">
+          <object class="GtkRevealer" id="changes_revealer">
+            <property name="transition-type">slide-down</property>
+            <property name="transition-duration">250</property>
+
+            <child>
+              <object class="GtkActionBar">
+
+                <child>
+                  <object class="GtkBox">
+                    <property name="margin-start">6</property>
+                    <property name="margin-top">6</property>
+                    <property name="margin-bottom">6</property>
+
+                    <!-- Cancel button -->
+                    <child>
+                      <object class="GtkButton" id="cancel_button">
+                        <property name="label" translatable="yes">Cancel</property>
+                        <property name="tooltip-text" translatable="yes">Discard Changes in Editor</property>
+                      </object>
+                    </child>
+
+                    <!-- Empty GtkBox between buttons -->
+                    <child>
+                      <object class="GtkBox">
+                        <property name="hexpand">true</property>
+                      </object>
+                    </child>
+
+                    <!-- Apply button -->
+                    <child>
+                      <object class="GtkButton" id="apply_button">
+                        <property name="label" translatable="yes">Apply</property>
+                        <property name="tooltip-text" translatable="yes">Apply Changes to Packet in List</property>
+                        <style>
+                          <class name="suggested-action"/>
+                        </style>
+                      </object>
+                    </child>
+
+                  </object>
+                </child>
+
+              </object>
+            </child>
+
+          </object>
+        </child>
 
       </object>
     </child>
